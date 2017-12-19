@@ -10,6 +10,26 @@
   align-items: center;
 
   &-box {
-    
+    width: 300px;
+
+    h4 {
+      text-align: center;
+      font-size: 22px;
+    }
+
+    &-change {
+      color: @subSpanColor;
+      border-bottom: 1px solid @subSpanColor;
+    }
+
+    &-change:hover {
+      color: @subSpanHoverColor;
+      border-bottom: 1px solid @subSpanHoverColor;
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+    }
   }
 }
