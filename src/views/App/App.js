@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.less';
+
+import { Route } from 'react-router-dom';
+
+import Login from '../Login/Login';
+import Home from '../Home/Home';
 
 class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      text: ''
-    };
-  }
-
-  async componentDidMount() {
-    const res = await fetch('/api/');
-    const text = await res.text();
-    this.setState({
-      text
-    })
-  }
-
   render() {
     return (
       <div className="App">
-        { this.state.text }
+        <Route exact path="/" component={Login} />
+        <Route path="/home" component={Home} />
       </div>
     );
   }
