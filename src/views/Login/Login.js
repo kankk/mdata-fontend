@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Login.less';
 
-import authority from '../../api/authority';
+import userAPI from './../../api/user';
+import authorityAPI from '../../api/authority';
+import { res_result } from './../../api/network';
 
 import Register from './Register';
 
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -19,11 +21,32 @@ class Login extends Component {
     };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
+    const username = this.state.username;
+    const password = this.state.password;
+    if (username !== '' && password !== '') {
+      try {
+        const loading = message.loading('注册中...', 0);
+        const result = await userAPI.login({
+          username,
+          password
+        });
+        setTimeout(loading, 0);
+        if (result) {
+          message.success('登录成功');
+        } else {
+          message.error('用户名或者密码错误');
+        }
+      } catch (err) {
+        message.error(res_result.globalServerError);
+      }
+    } else {
+      message.warn('用户名或者密码不能为空')
+    }
   }
 
-  handleChangeSpan = () => {
+  handleRegisterSpan = () => {
     this.setState({
       visibleRegister: true
     });
@@ -48,7 +71,7 @@ class Login extends Component {
     });
   }
 
-  handlePasswrodChange = (e) => {
+  handlePasswordChange = (e) => {
     this.setState({
       password: e.target.value
     });
@@ -56,7 +79,7 @@ class Login extends Component {
 
   async componentWillMount() {
     try {
-      const result = await authority.getRegisterAuthority();
+      const result = await authorityAPI.getRegisterAuthority();
       if (result) {
         this.setState({
           isAllowRegister: true
@@ -82,11 +105,11 @@ class Login extends Component {
               <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}}/>} value={username} onChange={this.handleUsernameChange} placeholder="用户名"/>
             </FormItem>
             <FormItem>
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)'}}/>} value={password} onChange={this.handlePasswrodChange} type="password" placeholder="密码"/>
+              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)'}}/>} value={password} onChange={this.handlePasswordChange} type="password" placeholder="密码"/>
             </FormItem>
             { isAllowRegister &&
               <FormItem>
-                <span className="login-box-change" onClick={this.handleChangeSpan}>注册</span>
+                <span className="login-box-change" onClick={this.handleRegisterSpan}>注册</span>
               </FormItem>
             }
             <FormItem>

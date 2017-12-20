@@ -1,4 +1,6 @@
 export const res_result = {
+  globalServerError: '服务器错误',
+
   // Global
   serverError: '0000',  // 服务器错误
   reqValueError: '0002',  // 请求值错误
