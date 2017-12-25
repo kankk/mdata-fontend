@@ -22,5 +22,24 @@ export default {
         reject(err);
       }
     });
+  },
+  getVisitorAuthority() {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await get(api.authority.visitor);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.moduleOpen) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 }

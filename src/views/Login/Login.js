@@ -7,6 +7,9 @@ import { res_result } from './../../api/network';
 
 import Register from './Register';
 
+import { Redirect } from 'react-router-dom';
+import router from './../router';
+
 import { Form, Icon, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
 
@@ -15,6 +18,7 @@ class Login extends Component {
     super();
     this.state = {
       isAllowRegister: false,
+      isAllowVisitor: false,
       visibleRegister: false,
       username: '',
       password: ''
@@ -25,16 +29,22 @@ class Login extends Component {
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
-    if (username !== '' && password !== '') {
+    if ((username !== '' && password !== '') || this.state.isAllowVisitor) {
       try {
-        const loading = message.loading('注册中...', 0);
+        const loading = message.loading('登录中...', 0);
         const result = await userAPI.login({
           username,
           password
         });
         setTimeout(loading, 0);
         if (result) {
+          router.logined = true;
           message.success('登录成功');
+          this.setState({
+            username: '',
+            password: ''
+          });
+          this.props.history.replace('/home');
         } else {
           message.error('用户名或者密码错误');
         }
@@ -77,25 +87,29 @@ class Login extends Component {
     });
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
-      const result = await authorityAPI.getRegisterAuthority();
-      if (result) {
-        this.setState({
-          isAllowRegister: true
-        })
-      } else {
-        this.setState({
-          isAllowRegister: false
-        });
-      }
+      const resultRegister = await authorityAPI.getRegisterAuthority();
+      const resultVisitor = await authorityAPI.getVisitorAuthority();
+      this.setState({
+        isAllowRegister: resultRegister,
+        isAllowVisitor: resultVisitor
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
   render() {
-    const { isAllowRegister, visibleRegister, username, password } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: '/'}};
+    
+    if(router.logined) {
+      return (
+        <Redirect to={from} />
+      )
+    }
+
+    const { isAllowRegister, isAllowVisitor, visibleRegister, username, password } = this.state;
     return (
       <div className="login">
         <div className="login-box">
@@ -115,6 +129,11 @@ class Login extends Component {
             <FormItem>
               <Button type="primary" htmlType="submit">登录</Button>
             </FormItem>
+            { isAllowVisitor &&
+              <FormItem>
+                <Button type="primary" htmlType="submit">游客登录</Button>
+              </FormItem>
+            }
           </Form>
           { isAllowRegister &&
             <Register visible={visibleRegister} onRegisterSuccess={this.handleRegisterSuccess}/>
