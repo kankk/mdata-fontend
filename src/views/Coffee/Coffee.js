@@ -6,8 +6,8 @@ import { Route, Link, Redirect } from 'react-router-dom';
 import CoffeeBean from './CoffeeBean';
 import CoffeeBeverage from './CoffeeBeverage';
 
-import { Button, Layout, Menu, Icon } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import { Layout, Menu } from 'antd';
+const { Content, Sider } = Layout;
 
 
 const coffeeSidebarList = [
@@ -34,10 +34,7 @@ class Coffee extends Component {
 
   render() {
     const siderStyle = {
-      // overflow: 'auto',
       height: '100vh',
-      // position: 'fixed',
-      // left: 0
     };
 
     const MenuItemList = coffeeSidebarList.map((item) => 
@@ -54,8 +51,11 @@ class Coffee extends Component {
 
     return (
       <Layout>
-        <Sider style={siderStyle}>
-          <Menu theme="dark" model="inline" defaultSelectedKeys={'/bean'}>
+        <Sider className="module-sider" style={siderStyle}>
+          <div className="module-sider-logo">
+            <img src={'../img/coffee.png'} alt=""/>
+          </div>
+          <Menu theme="dark" model="inline" defaultSelectedKeys={['/bean']}>
             { MenuItemList }
           </Menu>
         </Sider>
