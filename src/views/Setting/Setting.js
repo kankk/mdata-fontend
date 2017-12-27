@@ -1,39 +1,33 @@
 import React, { Component } from 'react';
-import './Coffee.less';
+import './Setting.less';
+
+import AuthorityModule from './AuthorityModule';
 
 import { Route, Link, Redirect } from 'react-router-dom';
-
-import CoffeeBean from './CoffeeBean';
-import CoffeeBeverage from './CoffeeBeverage';
 
 import { Layout, Menu } from 'antd';
 const { Content, Sider } = Layout;
 
-
-const coffeeSidebarList = [
+const settingSidebarList = [
   {
-    path: '/bean',
-    component: CoffeeBean,
-    navName: '咖啡豆'
-  }, {
-    path: '/beverage',
-    component: CoffeeBeverage,
-    navName: '咖啡饮料'
+    path: '/authoritymodule',
+    component: AuthorityModule,
+    navName: '模块权限'
   }
 ];
 
-class Coffee extends Component {
+class Setting extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  
+
   handleLogoBack = () => {
     this.props.history.replace('/home');
   }
 
   render() {
-    const MenuItemList = coffeeSidebarList.map((item) => 
+    const MenuItemList = settingSidebarList.map((item) => 
       <Menu.Item key={item.path}>
         <Link to={`${this.props.match.url}${item.path}`}>
           <span>{ item.navName }</span>
@@ -41,7 +35,7 @@ class Coffee extends Component {
       </Menu.Item>
     );
 
-    const RouteList = coffeeSidebarList.map((item) =>
+    const RouteList = settingSidebarList.map((item) =>
       <Route key={item.path} path={`${this.props.match.url}${item.path}`} component={item.component}></Route>
     );
 
@@ -49,9 +43,9 @@ class Coffee extends Component {
       <Layout>
         <Sider className="module-sider">
           <div className="module-sider-logo">
-            <img src={'../img/coffee.png'} alt="" onClick={this.handleLogoBack}/>
+            <img src={'../img/setting.png'} alt="" onClick={this.handleLogoBack}/>
           </div>
-          <Menu theme="dark" model="inline" defaultSelectedKeys={['/bean']}>
+          <Menu theme="dark" model="inline" defaultSelectedKeys={['/authoritymodule']}>
             { MenuItemList }
           </Menu>
         </Sider>
@@ -59,7 +53,7 @@ class Coffee extends Component {
           <Content>
             { RouteList }
             <Route exact path={this.props.match.url} render={() => (
-              <Redirect to={`${this.props.match.url}/bean`} />
+              <Redirect to={`${this.props.match.url}/authoritymodule`} />
             )} />
           </Content>
         </Layout>
@@ -68,4 +62,4 @@ class Coffee extends Component {
   }
 }
 
-export default Coffee;
+export default Setting;
