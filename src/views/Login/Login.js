@@ -20,6 +20,7 @@ class Login extends Component {
       isAllowRegister: false,
       isAllowVisitor: false,
       visibleRegister: false,
+      logining: false,
       username: '',
       password: ''
     };
@@ -31,12 +32,16 @@ class Login extends Component {
     const password = this.state.password;
     if ((username !== '' && password !== '') || this.state.isAllowVisitor) {
       try {
-        const loading = message.loading('登录中...', 0);
+        this.setState({
+          logining: true
+        });
         const result = await userAPI.login({
           username,
           password
         });
-        setTimeout(loading, 0);
+        this.setState({
+          logining: false
+        });
         if (result) {
           router.logined = true;
           message.success('登录成功');
@@ -109,7 +114,7 @@ class Login extends Component {
       )
     }
 
-    const { isAllowRegister, isAllowVisitor, visibleRegister, username, password } = this.state;
+    const { isAllowRegister, isAllowVisitor, visibleRegister, logining, username, password } = this.state;
     return (
       <div className="login">
         <div className="login-box">
@@ -127,11 +132,11 @@ class Login extends Component {
               </FormItem>
             }
             <FormItem>
-              <Button type="primary" htmlType="submit">登录</Button>
+              <Button type="primary" htmlType="submit" loading={logining}>登录</Button>
             </FormItem>
             { isAllowVisitor &&
               <FormItem>
-                <Button type="primary" htmlType="submit">游客登录</Button>
+                <Button type="primary" htmlType="submit" loading={logining}>游客登录</Button>
               </FormItem>
             }
           </Form>

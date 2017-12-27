@@ -33,10 +33,6 @@ class Coffee extends Component {
   }
 
   render() {
-    const siderStyle = {
-      height: '100vh',
-    };
-
     const MenuItemList = coffeeSidebarList.map((item) => 
       <Menu.Item key={item.path}>
         <Link to={`${this.props.match.url}${item.path}`}>
@@ -51,7 +47,7 @@ class Coffee extends Component {
 
     return (
       <Layout>
-        <Sider className="module-sider" style={siderStyle}>
+        <Sider className="module-sider">
           <div className="module-sider-logo">
             <img src={'../img/coffee.png'} alt=""/>
           </div>

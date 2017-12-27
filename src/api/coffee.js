@@ -1,0 +1,80 @@
+import api from './api';
+import { res_result } from './network';
+
+const get = url => fetch(url);
+
+const post = (url, coffee) => fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(coffee)
+});
+
+const put = (url, coffee) => fetch(url, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(coffee)
+});
+
+export default {
+  getCoffeeBeans() {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await get(api.coffee.allCoffeeBeans);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.getSuccess) {
+            resolve(resJson.rows);
+          } else {
+            reject();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
+  addCoffeeBean(coffeebean) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await post(api.coffee.coffeeBean, coffeebean);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.postSuccess) {
+            resolve(resJson.rows[0]);
+          } else {
+            resolve();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
+  updateCoffeeBean(coffeebean) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await put(api.coffee.coffeeBean, coffeebean);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.putSuccess) {
+            resolve(resJson.rows[0]);
+          } else {
+            resolve();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+}

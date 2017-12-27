@@ -10,20 +10,14 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: this.props.visible,
       username: '',
       password: '',
       repassword: ''
     };
   }
 
-  static defaultProps = {
-    visible: false
-  }
-
   componentWillReceiveProps(nextProps) {
     this.setState({
-      visible: nextProps.visible,
       username: '',
       password: '',
       repassword: ''
@@ -60,13 +54,9 @@ class Register extends Component {
         setTimeout(loading, 0);
         if (result === res_result.userRegisterSuccess) {
           message.success('注册成功');
-          this.setState({
-            visible: false
-          }, () => {
-            this.props.onRegisterSuccess({
-              username: this.state.username,
-              password: this.state.password
-            });
+          this.props.onRegisterSuccess({
+            username: this.state.username,
+            password: this.state.password
           });
         } else if (result === res_result.userExist) {
           message.warn('用户名已存在');
@@ -82,15 +72,12 @@ class Register extends Component {
   }
 
   handleCancel = () => {
-    this.setState({
-      visible: false
-    }, () => {
-      this.props.onRegisterSuccess();
-    });
+    this.props.onRegisterSuccess();
   }
 
   render() {
-    const { visible, username, password, repassword } = this.state;
+    const { username, password, repassword } = this.state;
+    const { visible } = this.props;
     return (
       <Modal 
         visible={visible}
