@@ -41,5 +41,24 @@ export default {
         reject(err);
       }
     });
+  },
+  getAllModules() {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await get(api.authority.modules);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.getSuccess) {
+            resolve(resJson.rows);
+          } else {
+            resolve();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 }

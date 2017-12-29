@@ -19,6 +19,14 @@ const put = (url, coffee) => fetch(url, {
   body: JSON.stringify(coffee)
 });
 
+const deleteMethod = (url, coffee) => fetch(url, {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(coffee)
+});
+
 export default {
   getCoffeeBeans() {
     return new Promise(async(resolve, reject) => {
@@ -68,6 +76,25 @@ export default {
             resolve(resJson.rows[0]);
           } else {
             resolve();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
+  deleteCoffeeBean(id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await deleteMethod(api.coffee.coffeeBean, {id: id});
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.deleteSuccess) {
+            resolve(true)
+          } else {
+            resolve(false);
           }
         } else {
           reject();

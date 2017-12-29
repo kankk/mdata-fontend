@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Home.less';
 
-import { Layout, Card } from 'antd';
+import { Layout, Card, Icon } from 'antd';
 const { Header, Content, Footer } = Layout;
-const { Meta } = Card;
+// const { Meta } = Card;
 
 const cardItems = [
   {
@@ -24,6 +24,10 @@ class Home extends Component {
     this.props.history.push(path);
   }
 
+  handleSettingClick = () => {
+    this.props.history.push('/setting');
+  }
+
   render() {
     const contentStyle = {
       margin: '16px 16px 0px 16px',
@@ -42,11 +46,14 @@ class Home extends Component {
 
     return (
       <Layout className="home">
-        <Header>
-
+        <Header className="home-header">
+          <div className="home-header-item home-header-left"></div>
+          <div className="home-header-item home-header-center">模块库</div>
+          <div className="home-header-item home-header-right">
+            <Icon className="icon-clickable" type="setting" onClick={this.handleSettingClick}/>
+          </div>
         </Header>
         <Content style={contentStyle}>
-          {/* <Button onClick={this.handleClickCoffee}>Coffee</Button> */}
           { cardsHTML }
         </Content>
         <Footer style={{ textAlign: 'center', padding: '16px'}}>
