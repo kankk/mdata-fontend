@@ -3,7 +3,7 @@ import './CoffeeBean.less';
 
 import coffeeAPI from '../../api/coffee';
 
-import { Spin, List, Button, Icon } from 'antd';
+import { Spin, List, Button, Icon, message } from 'antd';
 import CoffeeBeanInfo from './CoffeeBeanInfo';
 import CoffeeBeanItem from './CoffeeBeanItem';
 
@@ -13,7 +13,6 @@ class CoffeeBean extends Component {
     this.state = {
       isLoading: false,
       visibleInfo: false,
-      originCoffeebeans: [],
       coffeebeans: []
     };
     this.selectCoffeeBean = null;
@@ -27,7 +26,6 @@ class CoffeeBean extends Component {
         const coffeebeans = await coffeeAPI.getCoffeeBeans();
         this.setState({
           isLoading: false,
-          originCoffeebeans: coffeebeans,
           coffeebeans
         });
       });
@@ -43,12 +41,41 @@ class CoffeeBean extends Component {
     });
   }
 
-  handleListItemClick = (item) => {
+  handleListItemEdit = (item) => {
     this.selectCoffeeBean = null;
     this.selectCoffeeBean = item;
     this.setState({
       visibleInfo: true
     });
+  }
+
+  handleListItemDelete = async (item) => {
+    try {
+      this.setState({
+        isLoading: true
+      }, async () => {
+        const result = await coffeeAPI.deleteCoffeeBean(item.id);
+        this.setState({
+          isLoading: false
+        }, () => {
+          if (result) {
+            const _coffeebeans = this.state.coffeebeans;
+            const _index = _coffeebeans.findIndex(function(coffeebean, index, arr) {
+              return coffeebean.id === item.id;
+            });
+            _coffeebeans.splice(_index, 1);
+            this.setState({
+              coffeebeans: _coffeebeans
+            });
+            message.success('删除成功');
+          } else {
+            message.warn('删除失败');
+          }
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   closeInfo = (coffeebean) => {
@@ -69,8 +96,7 @@ class CoffeeBean extends Component {
         coffeebeans.push(coffeebean);
       }
       Object.assign(updateState, {
-        coffeebeans,
-        originCoffeebeans: coffeebeans
+        coffeebeans
       });
     }
     this.setState(updateState);
@@ -80,7 +106,7 @@ class CoffeeBean extends Component {
     const { isLoading, visibleInfo, coffeebeans } = this.state;
 
     const listItemHTML = coffeebeans.map(item => 
-      <CoffeeBeanItem key={item.id} onClick={() => this.handleListItemClick(item)} coffeebean={item}></CoffeeBeanItem>
+      <CoffeeBeanItem key={item.id} onEditClick={() => this.handleListItemEdit(item)} onDeleteClick={() => this.handleListItemDelete(item)} coffeebean={item}></CoffeeBeanItem>
     );
 
     return (
