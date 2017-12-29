@@ -5,6 +5,7 @@ import coffeeAPI from '../../api/coffee';
 
 import { Spin, List, Button, Icon } from 'antd';
 import CoffeeBeanInfo from './CoffeeBeanInfo';
+import CoffeeBeanItem from './CoffeeBeanItem';
 
 class CoffeeBean extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class CoffeeBean extends Component {
     const { isLoading, visibleInfo, coffeebeans } = this.state;
 
     const listItemHTML = coffeebeans.map(item => 
-      <div key={item.id} onClick={() => this.handleListItemClick(item)}>{ item.name_cn} - { item.name_en }</div>
+      <CoffeeBeanItem key={item.id} onClick={() => this.handleListItemClick(item)} coffeebean={item}></CoffeeBeanItem>
     );
 
     return (
