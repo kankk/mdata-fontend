@@ -37,7 +37,7 @@ export default {
           if (resJson.result === res_result.getSuccess) {
             resolve(resJson.rows);
           } else {
-            reject();
+            reject([]);
           }
         } else {
           reject();

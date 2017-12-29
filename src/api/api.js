@@ -2,6 +2,7 @@ export default {
   authority: {
     register: '/api/authority/register',
     visitor: '/api/authority/visitor',
+    module: '/api/authority/module',
     modules: '/api/authority/modules'
   },
   user: {
