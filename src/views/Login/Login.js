@@ -4,18 +4,18 @@ import './Login.less';
 import userAPI from './../../api/user';
 import authorityAPI from '../../api/authority';
 import { res_result } from './../../api/network';
+import storeHelper from '../../helper/storeHelper';
 
 import Register from './Register';
 
 import { Redirect } from 'react-router-dom';
-import router from './../router';
 
 import { Form, Icon, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isAllowRegister: false,
       isAllowVisitor: false,
@@ -43,7 +43,6 @@ class Login extends Component {
           logining: false
         });
         if (result) {
-          router.logined = true;
           message.success('登录成功');
           this.setState({
             username: '',
@@ -54,6 +53,7 @@ class Login extends Component {
           message.error('用户名或者密码错误');
         }
       } catch (err) {
+        console.log(err);
         message.error(res_result.globalServerError);
       }
     } else {
@@ -94,12 +94,13 @@ class Login extends Component {
 
   async componentDidMount() {
     try {
-      const resultRegister = await authorityAPI.getRegisterAuthority();
-      const resultVisitor = await authorityAPI.getVisitorAuthority();
-      this.setState({
-        isAllowRegister: resultRegister,
-        isAllowVisitor: resultVisitor
-      });
+      const result = await authorityAPI.getAllModules();
+      if (result) {
+        this.setState({
+          isAllowRegister: storeHelper.getAModuleByName('register').status,
+          isAllowVisitor: storeHelper.getAModuleByName('visitor').status
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -108,7 +109,7 @@ class Login extends Component {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/'}};
     
-    if(router.logined) {
+    if(storeHelper.getLoginStatus()) {
       return (
         <Redirect to={from} />
       )

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Home.less';
 
+import {store} from '../../index';
+
 import { Layout, Card, Icon, Row, Col } from 'antd';
 const { Header, Content, Footer } = Layout;
 // const { Meta } = Card;
@@ -20,8 +22,8 @@ const cardItems = [
 ]
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './AuthorityModule.less';
 
+import storeHelpter from '../../helper/storeHelper';
+import {store} from '../../index';
+
 import authorityAPI from '../../api/authority';
 import { Spin, List, Button, Icon, message, Switch } from 'antd';
 
@@ -18,7 +21,7 @@ class AuthorityModule extends Component {
       this.setState({
         isLoading: true
       }, async () => {
-        const aModules = await authorityAPI.getAllModules();
+        const aModules = storeHelpter.getAllMoudles();
         this.setState({
           isLoading: false,
           aModules

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import storeHelper from '../helper/storeHelper';
 
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
   <Route {...rest} render={props => (
-    router.logined ? (<Component {...props}/>) : (<Redirect to={{
+    storeHelper.getLoginStatus() ? (<Component {...props}/>) : (<Redirect to={{
       pathname: '/',
       state: { from: props.location }
     }}/>)
@@ -12,7 +13,6 @@ const PrivateRoute = ({ component: Component, ...rest}) => (
 );
 
 const router = {
-  logined: false,
   PrivateRoute
 }
 

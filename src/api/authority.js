@@ -1,5 +1,7 @@
 import api from './api';
 import {res_result} from './network';
+import { store } from '../index';
+import { initModules } from '../actions/authority';
 
 const get = url => fetch(url);
 
@@ -64,9 +66,10 @@ export default {
                 row.status = false;
               }
             }
-            resolve(resJson.rows);
+            store.dispatch(initModules(resJson.rows));
+            resolve(true);
           } else {
-            resolve([]);
+            resolve(false);
           }
         } else {
           reject();

@@ -1,5 +1,7 @@
 import api from './api';
 import { res_result } from './network';
+import { store } from '../index';
+import { login as aLogin } from '../actions/user';
 import md5 from 'md5';
 
 const get = url => fetch(url);
@@ -27,6 +29,7 @@ export default {
         if (res.ok) {
           const resJson = await res.json();
           if (resJson.result === res_result.userLoginSuccess) {
+            store.dispatch(aLogin(loginUser.username));
             resolve(true);
           } else {
             resolve(false);
