@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './CoffeeBeanInfo.less';
+import './CoffeeBeverageInfo.less';
 
 import coffeeAPI from '../../api/coffee';
 import { Modal, Form, Input, message } from 'antd';
 
-class CoffeeBeanInfoModal extends Component {
+class CoffeeBeverageInfoModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       okLoading: false,
-      currentCoffeeBean: {},
+      currentCoffeeBeverage: {},
     };
     this.info = {
       title: '',
@@ -19,15 +19,15 @@ class CoffeeBeanInfoModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     // 初始化
-    this.state.currentCoffeeBean = Object.assign({
+    this.state.currentCoffeeBeverage = Object.assign({
       name_cn: '',
       name_en: '',
       origin: ''
-    }, nextProps.coffeebean)
-    if(!nextProps.coffeebean) {
-      this.info.title = '新增咖啡豆'
+    }, nextProps.coffeebeverage)
+    if(!nextProps.coffeebeverage) {
+      this.info.title = '新增咖啡饮料'
     } else {
-      this.info.title = '修改咖啡豆'
+      this.info.title = '修改咖啡饮料'
     }
   }
 
@@ -39,22 +39,22 @@ class CoffeeBeanInfoModal extends Component {
         });
         // 表单验证通过
         let result;
-        if (this.state.currentCoffeeBean.id) {
-          result = await coffeeAPI.updateCoffeeBean(Object.assign(values, {
-            id: this.state.currentCoffeeBean.id
+        if (this.state.currentCoffeeBeverage.id) {
+          result = await coffeeAPI.updateCoffeeBeverage(Object.assign(values, {
+            id: this.state.currentCoffeeBeverage.id
           }));
         } else {
-          result = await coffeeAPI.addCoffeeBean(values);
+          result = await coffeeAPI.addCoffeeBeverage(values);
         }
         this.setState({
           okLoading: false
         });
         if (result) {
-          message.success('新增咖啡豆成功');
+          message.success('新增咖啡饮料成功');
           this.props.form.resetFields();
           this.props.closeInfo(result);
         } else {
-          message.error('新增咖啡豆失败');
+          message.error('新增咖啡饮料失败');
         }
       }
     });
@@ -67,7 +67,7 @@ class CoffeeBeanInfoModal extends Component {
   render(){
     const { visible } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { currentCoffeeBean } = this.state;
+    const { currentCoffeeBeverage } = this.state;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -82,7 +82,7 @@ class CoffeeBeanInfoModal extends Component {
       <Modal title={this.info.title} visible={visible} onOk={this.handleOk} onCancel={this.handleCancel}>
         <Form.Item {...formItemLayout} label="名称(CN)">
           {getFieldDecorator('name_cn', {
-            initialValue: this.state.currentCoffeeBean.name_cn,
+            initialValue: this.state.currentCoffeeBeverage.name_cn,
             rules: [{ required: true, message: '名称(CN)不能为空!' }],
           })(
             <Input />
@@ -90,7 +90,7 @@ class CoffeeBeanInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="名称(EN)">
           {getFieldDecorator('name_en', {
-            initialValue: this.state.currentCoffeeBean.name_en,
+            initialValue: this.state.currentCoffeeBeverage.name_en,
             rules: [{ required: false, message: '名称(EN)不能为空!' }],
           })(
             <Input />
@@ -98,16 +98,8 @@ class CoffeeBeanInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="产地">
           {getFieldDecorator('origin', {
-            initialValue: this.state.currentCoffeeBean.origin,
+            initialValue: this.state.currentCoffeeBeverage.origin,
             rules: [{ required: false, message: '产地不能为空!' }],
-          })(
-            <Input />
-          )}
-        </Form.Item>
-        <Form.Item {...formItemLayout} label="口感">
-          {getFieldDecorator('origin', {
-            initialValue: this.state.currentCoffeeBean.origin,
-            rules: [{ required: false, message: '口感不能为空!' }],
           })(
             <Input />
           )}
@@ -117,6 +109,6 @@ class CoffeeBeanInfoModal extends Component {
   } 
 }
 
-const CoffeeBeanInfo = Form.create()(CoffeeBeanInfoModal);
+const CoffeeBeverageInfo = Form.create()(CoffeeBeverageInfoModal);
 
-export default CoffeeBeanInfo;
+export default CoffeeBeverageInfo;

@@ -11,7 +11,9 @@ export default {
   },
   coffee: {
     allCoffeeBeans: '/api/coffee/beans',
-    coffeeBean: '/api/coffee/bean'
+    coffeeBean: '/api/coffee/bean',
+    allCoffeeBeverages: '/api/coffee/beverages',
+    coffeeBeverage: '/api/coffee/beverage'
   },
   trace: {
     count: '/api/trace/count',
