@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Setting.less';
 
 import AuthorityModule from './AuthorityModule';
+import UserManager from './UserManager';
 
 import { Route, Link, Redirect } from 'react-router-dom';
 
@@ -13,6 +14,10 @@ const settingSidebarList = [
     path: '/authoritymodule',
     component: AuthorityModule,
     navName: '模块权限'
+  }, {
+    path: '/usermanager',
+    component: UserManager,
+    navName: '用户管理'
   }
 ];
 
