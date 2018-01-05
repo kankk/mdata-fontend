@@ -5,6 +5,7 @@ const get = url => fetch(url);
 
 const post = (url, coffee) => fetch(url, {
   method: 'POST',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -13,6 +14,7 @@ const post = (url, coffee) => fetch(url, {
 
 const put = (url, coffee) => fetch(url, {
   method: 'PUT',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -21,6 +23,7 @@ const put = (url, coffee) => fetch(url, {
 
 const deleteMethod = (url, coffee) => fetch(url, {
   method: 'DELETE',
+  credentials: 'include',
   headers: {
     'Content-Type': 'application/json'
   },

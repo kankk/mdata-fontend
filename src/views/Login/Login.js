@@ -26,8 +26,7 @@ class Login extends Component {
     };
   }
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
+  handleSubmit = async (isLogin) => {
     const username = this.state.username;
     const password = this.state.password;
     if ((username !== '' && password !== '') || this.state.isAllowVisitor) {
@@ -38,7 +37,7 @@ class Login extends Component {
         const result = await userAPI.login({
           username,
           password
-        });
+        }, isLogin);
         this.setState({
           logining: false
         });
@@ -95,6 +94,7 @@ class Login extends Component {
   async componentDidMount() {
     try {
       const result = await authorityAPI.getAllModules();
+      const resuult2 = await userAPI.checkUserStatus();
       if (result) {
         this.setState({
           isAllowRegister: storeHelper.getAModuleByName('register').status,
@@ -120,7 +120,7 @@ class Login extends Component {
       <div className="login">
         <div className="login-box">
           <h4>登录</h4>
-          <Form onSubmit={this.handleSubmit} className="login-box-form">
+          <Form className="login-box-form">
             <FormItem>
               <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}}/>} value={username} onChange={this.handleUsernameChange} placeholder="用户名"/>
             </FormItem>
@@ -133,11 +133,11 @@ class Login extends Component {
               </FormItem>
             }
             <FormItem>
-              <Button type="primary" htmlType="submit" loading={logining}>登录</Button>
+              <Button type="primary" htmlType="submit" loading={logining} onClick={() => this.handleSubmit(true)}>登录</Button>
             </FormItem>
             { isAllowVisitor &&
               <FormItem>
-                <Button type="primary" htmlType="submit" loading={logining}>游客登录</Button>
+                <Button type="primary" htmlType="submit" loading={logining} onClick={() => this.handleSubmit(false)}>游客登录</Button>
               </FormItem>
             }
           </Form>

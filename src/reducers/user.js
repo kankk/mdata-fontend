@@ -1,5 +1,7 @@
 const defaultState = {
+  id: '',
   username: '',
+  role: '',
   logined: false
 }
 
@@ -8,14 +10,11 @@ const user = (state = defaultState, action) => {
   switch (type) {
     case 'LOGIN':
       return Object.assign({}, state, {
-        username: action.username,
+        ...action.user,
         logined: true
       });
     case 'LOGOUT':
-      return Object.assign({}, state, {
-        username: '',
-        logined: false
-      });
+      return Object.assign({}, state, defaultState);
     default:
       return state;
   }

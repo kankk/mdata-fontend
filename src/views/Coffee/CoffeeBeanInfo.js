@@ -22,7 +22,8 @@ class CoffeeBeanInfoModal extends Component {
     this.state.currentCoffeeBean = Object.assign({
       name_cn: '',
       name_en: '',
-      origin: ''
+      origin: '',
+      mouthfeel: '',
     }, nextProps.coffeebean)
     if(!nextProps.coffeebean) {
       this.info.title = '新增咖啡豆'
@@ -105,8 +106,8 @@ class CoffeeBeanInfoModal extends Component {
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="口感">
-          {getFieldDecorator('origin', {
-            initialValue: this.state.currentCoffeeBean.origin,
+          {getFieldDecorator('mouthfeel', {
+            initialValue: this.state.currentCoffeeBean.mouthfeel,
             rules: [{ required: false, message: '口感不能为空!' }],
           })(
             <Input />

@@ -23,4 +23,8 @@ export const res_result = {
   userRegisterError: '0110',  // 用户注册失败
   userLoginSuccess: '0121', // 用户登录成功
   userLoginError: '0120', //  用户登录成功
+  userLogoutSuccess: '0131',  // 用户登出成功
+  userLogoutError: '0130',  // 用户登出失败
+  userLogined: '0141', // 用户已经登录
+  userNotLogined: '0142', //用户还没登录
 }

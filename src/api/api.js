@@ -1,12 +1,12 @@
 export default {
   authority: {
-    register: '/api/authority/register',
-    visitor: '/api/authority/visitor',
     module: '/api/authority/module',
     modules: '/api/authority/modules'
   },
   user: {
+    status: '/api/user/status',
     login: '/api/user/login',
+    logout: '/api/user/logout',
     register: '/api/user/register'
   },
   coffee: {

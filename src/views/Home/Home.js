@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import './Home.less';
 
 import {store} from '../../index';
+import userAPI from '../../api/user';
+import {res_result} from '../../api/network';
 
-import { Layout, Card, Icon, Row, Col } from 'antd';
+import { Layout, Card, Icon, Row, Col, Popconfirm, message } from 'antd';
 const { Header, Content, Footer } = Layout;
-// const { Meta } = Card;
 
 const cardItems = [
   {
     name: 'coffee',
     path: '/coffee',
     title: '咖啡',
-    description: '关于咖啡的内容'
+    description: '关于咖啡的模块'
   }, {
     name: 'trace',
     path: '/trace',
     title: '统计',
-    description: '关于统计的内容'
+    description: '关于统计的模块'
   }
 ]
 
@@ -35,6 +36,21 @@ class Home extends Component {
     this.props.history.push('/setting');
   }
 
+  handleLogoutClick = async () => {
+    try {
+      const result = await userAPI.logout();
+      if (result) {
+        
+        this.props.history.replace('/');
+      } else {
+        message.warn('登出失败, 请重试');
+      }
+    } catch (err) {
+      console.log(err);
+      message.error(res_result.globalServerError);
+    }
+  }
+
   render() {
     const contentStyle = {
       margin: '16px 16px 0px 16px',
@@ -42,9 +58,10 @@ class Home extends Component {
       background: '#fff'
     };
 
-    const cardStyle = {
-      // width: '200px'
-    };
+    const iconStyle = {
+      'marginLeft': '16px'
+    }
+
     const cardsHTML = cardItems.map((item) => 
       <Col span={6} key={item.name}>
         <Card key={item.name} hoverable title={item.title} onClick={this.handleCardClick.bind(this, item.path)}>
@@ -59,7 +76,10 @@ class Home extends Component {
           <div className="home-header-item home-header-left"></div>
           <div className="home-header-item home-header-center">模块库</div>
           <div className="home-header-item home-header-right">
-            <Icon className="icon-clickable" type="setting" onClick={this.handleSettingClick}/>
+            <Icon style={iconStyle} className="icon-clickable" type="setting" onClick={this.handleSettingClick}/>
+            <Popconfirm placement="bottomRight" title={'是否确定登出?'} onConfirm={this.handleLogoutClick} okText="确定" cancelText="取消">
+              <Icon style={iconStyle} className="icon-clickable" type="logout" />
+            </Popconfirm>
           </div>
         </Header>
         <Content style={contentStyle}>
