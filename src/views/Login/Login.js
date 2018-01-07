@@ -107,7 +107,7 @@ class Login extends Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/'}};
+    const { from } = this.props.location.state || { from: { pathname: '/home'}};
     
     if(storeHelper.getLoginStatus()) {
       return (
