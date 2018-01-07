@@ -4,7 +4,11 @@ export const aModule = (state = defaultState, action) => {
   const { type } = action;
   switch (type) {
     case 'INIT_MODULES':
-      return [...state, ...action.modules];
+      if (state.length > 0) {
+        return [...state];
+      } else {
+        return [...state, ...action.modules];
+      }
     default:
       return state;
   }
