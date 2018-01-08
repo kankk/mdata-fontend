@@ -7,7 +7,8 @@ export default {
     status: '/api/user/status',
     login: '/api/user/login',
     logout: '/api/user/logout',
-    register: '/api/user/register'
+    register: '/api/user/register',
+    list: '/api/user/list'
   },
   coffee: {
     allCoffeeBeans: '/api/coffee/beans',

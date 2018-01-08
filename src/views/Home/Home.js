@@ -4,6 +4,7 @@ import './Home.less';
 import {store} from '../../index';
 import userAPI from '../../api/user';
 import {res_result} from '../../api/network';
+import storeHelper from '../../helper/storeHelper';
 
 import { Layout, Card, Icon, Row, Col, Popconfirm, message } from 'antd';
 const { Header, Content, Footer } = Layout;
@@ -70,13 +71,17 @@ class Home extends Component {
       </Col>
     );
 
+    const role = parseInt(storeHelper.getUserRole());
+
     return (
       <Layout className="home">
         <Header className="home-header">
           <div className="home-header-item home-header-left"></div>
           <div className="home-header-item home-header-center">模块库</div>
           <div className="home-header-item home-header-right">
-            <Icon style={iconStyle} className="icon-clickable" type="setting" onClick={this.handleSettingClick}/>
+            { role === 10 &&
+              <Icon style={iconStyle} className="icon-clickable" type="setting" onClick={this.handleSettingClick}/>
+            }
             <Popconfirm placement="bottomRight" title={'是否确定登出?'} onConfirm={this.handleLogoutClick} okText="确定" cancelText="取消">
               <Icon style={iconStyle} className="icon-clickable" type="logout" />
             </Popconfirm>

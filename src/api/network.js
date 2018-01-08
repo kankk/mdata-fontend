@@ -15,6 +15,8 @@ export const res_result = {
   deleteError: '0026',  // DELETE请求返回失败
   deleteSuccess: '0027',  // DELETE请求返回成功
 
+  // Authority
+  authorityError: '9000', // 权限不足
 
   // User
   userNotExist: '0100', // 用户不存在

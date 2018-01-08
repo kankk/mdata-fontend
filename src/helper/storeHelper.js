@@ -10,6 +10,10 @@ storeHelpter.getUserInfo = () => {
   return store.getState().user;
 }
 
+storeHelpter.getUserRole = () => {
+  return store.getState().user.role;
+}
+
 storeHelpter.getAModuleByName = (name) => {
   const modules = store.getState().aModule;
   for(let m of modules) {

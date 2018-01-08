@@ -107,5 +107,24 @@ export default {
         reject(err);
       }
     });
+  },
+  getAllUsers() {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await post(api.user.list);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.postSuccess) {
+            resolve(resJson.rows);
+          } else {
+            reject();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
   }
 }
