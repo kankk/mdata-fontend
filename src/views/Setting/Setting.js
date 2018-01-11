@@ -44,13 +44,16 @@ class Setting extends Component {
       <Route key={item.path} path={`${this.props.match.url}${item.path}`} component={item.component}></Route>
     );
 
+    const pathnameArr = this.props.location.pathname.split('/')
+    const defaultMenu = '/' + (pathnameArr[2] || 'authoritymodule');
+
     return (
       <Layout>
         <Sider className="module-sider">
           <div className="module-sider-logo">
             <img src={'../img/setting.png'} alt="" onClick={this.handleLogoBack}/>
           </div>
-          <Menu theme="dark" model="inline" defaultSelectedKeys={['/authoritymodule']}>
+          <Menu theme="dark" model="inline" defaultSelectedKeys={[defaultMenu]}>
             { MenuItemList }
           </Menu>
         </Sider>
