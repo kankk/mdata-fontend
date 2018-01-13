@@ -3,7 +3,7 @@ import './CoffeeBean.less';
 
 import coffeeAPI from '../../api/coffee';
 
-import { Spin, List, Button, Icon, message } from 'antd';
+import { Spin, Button, Icon, message } from 'antd';
 import CoffeeBeanInfo from './CoffeeBeanInfo';
 import CoffeeBeanItem from './CoffeeBeanItem';
 
@@ -32,6 +32,11 @@ class CoffeeBean extends Component {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  handleToDetail = (item) => {
+    const currentPath = this.props.location.pathname;
+    this.props.history.push(`${currentPath}/${item.id}`);
   }
 
   handleShowInfo = () => {
@@ -106,7 +111,7 @@ class CoffeeBean extends Component {
     const { isLoading, visibleInfo, coffeebeans } = this.state;
 
     const listItemHTML = coffeebeans.map(item => 
-      <CoffeeBeanItem key={item.id} onEditClick={() => this.handleListItemEdit(item)} onDeleteClick={() => this.handleListItemDelete(item)} coffeebean={item}></CoffeeBeanItem>
+      <CoffeeBeanItem key={item.id} onClick={() => this.handleToDetail(item)} coffeebean={item}></CoffeeBeanItem>
     );
 
     return (

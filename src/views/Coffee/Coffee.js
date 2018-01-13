@@ -4,6 +4,7 @@ import './Coffee.less';
 import { Route, Link, Redirect } from 'react-router-dom';
 
 import CoffeeBean from './CoffeeBean';
+import CoffeeBeanDetail from './CoffeeBeanDetail';
 import CoffeeBeverage from './CoffeeBeverage';
 
 import { Layout, Menu } from 'antd';
@@ -42,7 +43,7 @@ class Coffee extends Component {
     );
 
     const RouteList = coffeeSidebarList.map((item) =>
-      <Route key={item.path} path={`${this.props.match.url}${item.path}`} component={item.component}></Route>
+      <Route key={item.path} exact path={`${this.props.match.url}${item.path}`} component={item.component}></Route>
     );
 
     const pathnameArr = this.props.location.pathname.split('/')
@@ -61,6 +62,7 @@ class Coffee extends Component {
         <Layout>
           <Content>
             { RouteList }
+            <Route path={`${this.props.match.url}/bean/:id`} component={CoffeeBeanDetail}></Route>
             <Route exact path={this.props.match.url} render={() => (
               <Redirect to={`${this.props.match.url}/bean`} />
             )} />

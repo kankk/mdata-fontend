@@ -31,6 +31,29 @@ const deleteMethod = (url, coffee) => fetch(url, {
 });
 
 export default {
+  getCoffeeBean(id) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await get(`${api.coffee.coffeeBean}/${id}`);
+        if (res.ok) {
+          const resJson = await res.json();
+          if (resJson.result === res_result.getSuccess) {
+            if (resJson.rows.length > 0) {
+              resolve(resJson.rows[0]);
+            } else {
+              resolve();
+            }
+          } else {
+            resolve();
+          }
+        } else {
+          reject();
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
   getCoffeeBeans() {
     return new Promise(async(resolve, reject) => {
       try {
@@ -40,7 +63,7 @@ export default {
           if (resJson.result === res_result.getSuccess) {
             resolve(resJson.rows);
           } else {
-            reject([]);
+            resolve([]);
           }
         } else {
           reject();
@@ -59,7 +82,7 @@ export default {
           if (resJson.result === res_result.postSuccess) {
             resolve(resJson.rows[0]);
           } else {
-            resolve();
+            reject();
           }
         } else {
           reject();
@@ -78,7 +101,7 @@ export default {
           if (resJson.result === res_result.putSuccess) {
             resolve(resJson.rows[0]);
           } else {
-            resolve();
+            reject();
           }
         } else {
           reject();
