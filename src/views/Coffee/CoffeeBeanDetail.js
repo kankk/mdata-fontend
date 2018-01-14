@@ -4,7 +4,9 @@ import './CoffeeBeanDetail.less';
 import coffeeAPI from '../../api/coffee';
 import { res_result } from '../../api/network';
 
-import { message, Spin, Breadcrumb } from 'antd';
+import ShoppingRecord from '../../components/ShoppingRecord';
+
+import { message, Spin, Breadcrumb, Divider } from 'antd';
 
 const defaultCoffeebean = {
   name_cn: '',
@@ -45,7 +47,7 @@ class CoffeeBeanDetail extends Component {
           message.warn('获取咖啡豆详细失败');
         }
         this.setState(updateObj);
-      })
+      });
     } catch (err) {
       message.error(res_result.globalServerError);
     }
@@ -67,6 +69,9 @@ class CoffeeBeanDetail extends Component {
               <p className="main-title">{ coffeebean.name_cn}<span className="sub-title"> ( { coffeebean.name_en} )</span></p>
             </div>
           </Spin>
+          <Divider>购买记录</Divider>
+          <ShoppingRecord fid={this.id}/>
+          <Divider>图片集合</Divider>
         </div>
       </div>
     );

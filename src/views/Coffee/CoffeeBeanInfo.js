@@ -19,13 +19,15 @@ class CoffeeBeanInfoModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     // 初始化
-    this.state.currentCoffeeBean = Object.assign({
-      name_cn: '',
-      name_en: '',
-      origin: '',
-      mouthfeel: '',
-    }, nextProps.coffeebean)
-    if(!nextProps.coffeebean) {
+    this.setState({
+      currentCoffeeBean: Object.assign({
+        name_cn: '',
+        name_en: '',
+        origin: '',
+        mouthfeel: '',
+      }, nextProps.coffeebean)
+    })
+    if (!nextProps.coffeebean) {
       this.info.title = '新增咖啡豆'
     } else {
       this.info.title = '修改咖啡豆'
