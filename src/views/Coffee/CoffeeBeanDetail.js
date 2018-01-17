@@ -18,7 +18,7 @@ const defaultCoffeebean = {
 class CoffeeBeanDetail extends Component {
   constructor(props) {
     super(props);
-    this.id = '';
+    this.id = this.props.match.params.id;
     this.state = {
       coffeebean: Object.assign({}, defaultCoffeebean),
       isLoadingMain: false,
@@ -30,7 +30,6 @@ class CoffeeBeanDetail extends Component {
   }
 
   componentDidMount() {
-    this.id = this.props.match.params.id;
     try {
       this.setState({
         isLoadingMain: true

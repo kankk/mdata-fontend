@@ -14,7 +14,13 @@ export default {
     allCoffeeBeans: '/api/coffee/beans',
     coffeeBean: '/api/coffee/bean',
     allCoffeeBeverages: '/api/coffee/beverages',
-    coffeeBeverage: '/api/coffee/beverage'
+    coffeeBeverage: '/api/coffee/beverage',
+    allCoffeeInfos: '/api/coffee/infos',
+    coffeeInfo: '/api/coffee/info',
+  },
+  shoopingRecord: {
+    records: '/api/shoppingrecord/records',
+    record: '/api/shoppingrecord/record'
   },
   trace: {
     count: '/api/trace/count',

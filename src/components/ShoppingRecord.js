@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import './ShoppingRecord.less';
 
 import ShoppingRecordInfo from './ShoppingRecordInfo';
+import ShoppingRecordItem from './ShoppingRecordItem';
+import sRecordAPI from '../api/shoppingRecord';
+import storeHelpter from '../helper/storeHelper';
 
-import { Spin, Button, Icon, message } from 'antd';
+import { Spin, Button, Icon, message, Timeline } from 'antd';
 
 class ShoppingRecord extends Component {
   constructor(props) {
@@ -17,7 +20,10 @@ class ShoppingRecord extends Component {
   }
 
   handleShowInfo = () => {
-    this.selectRecord = null;
+    this.selectRecord = {
+      uid: storeHelpter.getUserInfo().id,
+      fid: this.props.fid
+    };
     this.setState({
       visibleInfo: true
     });
@@ -55,19 +61,39 @@ class ShoppingRecord extends Component {
   }
 
   componentDidMount() {
-
+    try {
+      this.setState({
+        isLoading: true
+      }, async () => {
+        const records = await sRecordAPI.getShoppingRecords(this.props.fid);
+        this.setState({
+          isLoading: false,
+          records
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
-    const { isLoading, visibleInfo } = this.state;
+    const { isLoading, visibleInfo, records } = this.state;
+
+    const shoppingRecordList = records.map((record) => 
+      <ShoppingRecordItem record={record}></ShoppingRecordItem>
+    );
+
     return (
       <div className="shopping-record">
         <div>
           <Button type="dashed" style={{ width: '100%' }} onClick={this.handleShowInfo}><Icon type="plus" />新增购买记录</Button>
         </div>
         <Spin spinning={isLoading}>
+          <Timeline style={{ marginTop: 20 }}>
+            { shoppingRecordList }
+          </Timeline>
         </Spin>
-        <ShoppingRecordInfo visible={visibleInfo} closeInfo={this.closeInfo} coffeebean={this.selectCoffeeBean}/>
+        <ShoppingRecordInfo visible={visibleInfo} closeInfo={this.closeInfo} record={this.selectRecord}/>
       </div>
     );
   }

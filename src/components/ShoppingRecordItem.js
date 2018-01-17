@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import './ShoppingRecordInfo.less';
 
+import {Timeline } from 'antd';
+
 class ShoppingRecordItem extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
   }
 
   render() {
+    const { record } = this.props;
     return (
-      <div></div>
+      <Timeline.Item>
+        { record.buy_date }
+      </Timeline.Item>
     );
   }
 }
