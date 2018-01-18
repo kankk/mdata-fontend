@@ -11,11 +11,11 @@ export default {
     list: '/api/user/list'
   },
   coffee: {
-    allCoffeeBeans: '/api/coffee/beans',
+    coffeeBeans: '/api/coffee/beans',
     coffeeBean: '/api/coffee/bean',
-    allCoffeeBeverages: '/api/coffee/beverages',
+    coffeeBeverages: '/api/coffee/beverages',
     coffeeBeverage: '/api/coffee/beverage',
-    allCoffeeInfos: '/api/coffee/infos',
+    coffeeInfos: '/api/coffee/infos',
     coffeeInfo: '/api/coffee/info',
   },
   shoopingRecord: {
