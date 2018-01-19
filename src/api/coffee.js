@@ -1,308 +1,127 @@
 import api from './api';
-import { res_result } from './network';
-
-const get = url => fetch(url);
-
-const post = (url, coffee) => fetch(url, {
-  method: 'POST',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(coffee)
-});
-
-const put = (url, coffee) => fetch(url, {
-  method: 'PUT',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(coffee)
-});
-
-const deleteMethod = (url, coffee) => fetch(url, {
-  method: 'DELETE',
-  credentials: 'include',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(coffee)
-});
+import request from './request';
 
 export default {
   getCoffeeBean(id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await get(`${api.coffee.coffeeBean}/${id}`);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.getSuccess) {
-            if (resJson.rows.length > 0) {
-              resolve(resJson.rows[0]);
-            } else {
-              resolve();
-            }
-          } else {
-            resolve();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(`${api.coffee.coffeeBean}/${id}`, {
+        method: 'GET'
+      });
+      if (resJson.result) {
+        resolve(resJson.row);
+      } else {
+        resolve();
       }
     });
   },
   getCoffeeBeans() {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await get(api.coffee.allCoffeeBeans);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.getSuccess) {
-            resolve(resJson.rows);
-          } else {
-            resolve([]);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBeans, {
+        method: 'GET'
+      });
+      resolve(resJson.rows);
     });
   },
   addCoffeeBean(coffeebean) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await post(api.coffee.coffeeBean, coffeebean);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.postSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            reject();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBean, {
+        method: 'POST',
+        body: coffeebean
+      });
+      resolve(resJson);
     });
   },
   updateCoffeeBean(coffeebean) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await put(api.coffee.coffeeBean, coffeebean);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.putSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            reject();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBean, {
+        method: 'PUT',
+        body: coffeebean
+      });
+      resolve(resJson);
     });
   },
   deleteCoffeeBean(id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await deleteMethod(api.coffee.coffeeBean, {id: id});
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.deleteSuccess) {
-            resolve(true)
-          } else {
-            resolve(false);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(`${api.coffee.coffeeBean}/${id}`, {
+        method: 'DELETE'
+      });
+      resolve(resJson);
     });
   },
   getCoffeeBeverages() {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await get(api.coffee.allCoffeeBeverages);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.getSuccess) {
-            resolve(resJson.rows);
-          } else {
-            reject([]);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBeverages, {
+        method: 'GET'
+      });
+      resolve(resJson.rows);
     });
   },
   addCoffeeBeverage(coffeebeverage) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await post(api.coffee.coffeeBeverage, coffeebeverage);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.postSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            resolve();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBeverage, {
+        method: 'POST',
+        body: coffeebeverage
+      });
+      resolve(resJson);
     });
   },
   updateCoffeeBeverage(coffeebeverage) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await put(api.coffee.coffeeBeverage, coffeebeverage);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.putSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            resolve();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeBeverage, {
+        method: 'PUT',
+        body: coffeebeverage
+      });
+      resolve(resJson);
     });
   },
   deleteCoffeeBeverage(id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await deleteMethod(api.coffee.coffeeBeverage, {id: id});
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.deleteSuccess) {
-            resolve(true)
-          } else {
-            resolve(false);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(`${api.coffee.coffeeBeverage}/${id}`, {
+        method: 'DELETE'
+      });
+      resolve()
     });
   },
   getCoffeeInfoByType(type) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await get(`${api.coffee.allCoffeeBeans}/${type}`);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.getSuccess) {
-            if (resJson.rows.length > 0) {
-              resolve(resJson.rows[0]);
-            } else {
-              resolve();
-            }
-          } else {
-            resolve();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(`${api.coffee.coffeeBeans}/${type}`, {
+        method: 'GET'
+      });
+      resolve(resJson.rows);
     });
   },
   getCoffeeInfos() {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await get(api.coffee.allCoffeeInfos);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.getSuccess) {
-            resolve(resJson.rows);
-          } else {
-            resolve([]);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeInfos, {
+        method: 'GET'
+      });
+      resolve(resJson.rows);
     });
   },
   addCoffeeInfo(coffeeinfo) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await post(api.coffee.coffeeInfo, coffeeinfo);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.postSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            reject();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeInfo, {
+        method: 'POST',
+        body: coffeeinfo
+      });
+      resolve(resJson);
     });
   },
   updateCoffeeInfo(coffeeinfo) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await put(api.coffee.coffeeInfo, coffeeinfo);
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.putSuccess) {
-            resolve(resJson.rows[0]);
-          } else {
-            reject();
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(api.coffee.coffeeInfo, {
+        method: 'PUT',
+        body: coffeeinfo
+      });
+      resolve(resJson);
     });
   },
   deleteCoffeeInfo(id) {
-    return new Promise(async(resolve, reject) => {
-      try {
-        const res = await deleteMethod(api.coffee.coffeeInfo, {id: id});
-        if (res.ok) {
-          const resJson = await res.json();
-          if (resJson.result === res_result.deleteSuccess) {
-            resolve(true)
-          } else {
-            resolve(false);
-          }
-        } else {
-          reject();
-        }
-      } catch (err) {
-        reject(err);
-      }
+    return new Promise(async (resolve, reject) => {
+      const resJson = await request(`${api.coffee.coffeeInfo}/${id}`, {
+        method: 'DELETE'
+      });
+      resolve()
     });
   },
 }

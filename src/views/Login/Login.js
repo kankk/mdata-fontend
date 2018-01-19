@@ -3,7 +3,6 @@ import './Login.less';
 
 import userAPI from './../../api/user';
 import authorityAPI from '../../api/authority';
-import { res_result } from './../../api/network';
 import storeHelper from '../../helper/storeHelper';
 
 import Register from './Register';
@@ -30,30 +29,25 @@ class Login extends Component {
     const username = this.state.username;
     const password = this.state.password;
     if ((username !== '' && password !== '') || this.state.isAllowVisitor) {
-      try {
+      this.setState({
+        logining: true
+      });
+      const result = await userAPI.login({
+        username,
+        password
+      }, isLogin);
+      this.setState({
+        logining: false
+      });
+      if (result) {
+        message.success('登录成功');
         this.setState({
-          logining: true
+          username: '',
+          password: ''
         });
-        const result = await userAPI.login({
-          username,
-          password
-        }, isLogin);
-        this.setState({
-          logining: false
-        });
-        if (result) {
-          message.success('登录成功');
-          this.setState({
-            username: '',
-            password: ''
-          });
-          this.props.history.replace('/home');
-        } else {
-          message.error('用户名或者密码错误');
-        }
-      } catch (err) {
-        console.log(err);
-        message.error(res_result.globalServerError);
+        this.props.history.replace('/home');
+      } else {
+        message.error('用户名或者密码错误');
       }
     } else {
       message.warn('用户名或者密码不能为空')
@@ -92,23 +86,20 @@ class Login extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const result = await authorityAPI.getAllModules();
-      const resuult2 = await userAPI.checkUserStatus();
-      if (result) {
-        this.setState({
-          isAllowRegister: storeHelper.getAModuleByName('register').status,
-          isAllowVisitor: storeHelper.getAModuleByName('visitor').status
-        });
-      }
-    } catch (err) {
-      console.log(err);
+    const result = await authorityAPI.getAllModules();
+    const resuult2 = await userAPI.checkUserStatus();
+    if (result) {
+      this.setState({
+        isAllowRegister: storeHelper.getAModuleByName('register').status,
+        isAllowVisitor: storeHelper.getAModuleByName('visitor').status
+      });
     }
   }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/home'}};
     
+    console.log(storeHelper.getLoginStatus());
     if(storeHelper.getLoginStatus()) {
       return (
         <Redirect to={from} />

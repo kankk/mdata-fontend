@@ -54,7 +54,7 @@ export default {
         method: 'POST',
         body: registerUser
       });
-      resolve(resJson.result);
+      resolve(resJson);
     });
   },
   logout() {
@@ -72,10 +72,9 @@ export default {
   },
   getAllUsers() {
     return new Promise(async (resolve, reject) => {
-      const res = await request(api.user.list, {
+      const resJson = await request(api.user.list, {
         method: 'POST'
       });
-      const resJson = await res.json();
       resolve(resJson.rows);
     });
   }

@@ -3,7 +3,6 @@ import './Home.less';
 
 import {store} from '../../index';
 import userAPI from '../../api/user';
-import {res_result} from '../../api/network';
 import storeHelper from '../../helper/storeHelper';
 
 import { Layout, Card, Icon, Row, Col, Popconfirm, message } from 'antd';
@@ -38,7 +37,6 @@ class Home extends Component {
   }
 
   handleLogoutClick = async () => {
-    try {
       const result = await userAPI.logout();
       if (result) {
         
@@ -46,10 +44,6 @@ class Home extends Component {
       } else {
         message.warn('登出失败, 请重试');
       }
-    } catch (err) {
-      console.log(err);
-      message.error(res_result.globalServerError);
-    }
   }
 
   render() {

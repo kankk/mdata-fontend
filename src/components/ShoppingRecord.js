@@ -80,7 +80,7 @@ class ShoppingRecord extends Component {
     const { isLoading, visibleInfo, records } = this.state;
 
     const shoppingRecordList = records.map((record) => 
-      <ShoppingRecordItem record={record}></ShoppingRecordItem>
+      <ShoppingRecordItem key ={record.id} record={record}></ShoppingRecordItem>
     );
 
     return (

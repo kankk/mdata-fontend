@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import userAPI from './../../api/user';
-import { res_result } from './../../api/network';
 
 import { Form, Icon, Input, Modal, message } from 'antd';
 const FormItem = Form.Item;
@@ -44,27 +43,21 @@ class Register extends Component {
 
   handleOk = async () => {
     if (this.state.password === this.state.repassword) {
-      try {
-        const loading = message.loading('注册中...', 0);
-        const user = {
+      const loading = message.loading('注册中...', 0);
+      const user = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      const result = await userAPI.register(user);
+      setTimeout(loading, 0);
+      if (result) {
+        message.success('注册成功');
+        this.props.onRegisterSuccess({
           username: this.state.username,
           password: this.state.password
-        };
-        const result = await userAPI.register(user);
-        setTimeout(loading, 0);
-        if (result === res_result.userRegisterSuccess) {
-          message.success('注册成功');
-          this.props.onRegisterSuccess({
-            username: this.state.username,
-            password: this.state.password
-          });
-        } else if (result === res_result.userExist) {
-          message.warn('用户名已存在');
-        } else {
-          message.warn('注册失败');
-        }
-      } catch (err) {
-        message.error(res_result.globalServerError);
+        });
+      } else {
+        message.warn('用户名已存在');
       }
     } else {
       message.warn('密码与确认密码不相同');

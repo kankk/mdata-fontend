@@ -3,7 +3,6 @@ import './ShoppingRecordInfo.less';
 
 import { Modal, Form, Input, message } from 'antd';
 import recordAPI from '../api/shoppingRecord';
-import { res_result } from '../api/network';
 
 class ShoppingRecordInfoModal extends Component {
   constructor(props) {
@@ -20,7 +19,6 @@ class ShoppingRecordInfoModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     // 初始化
-    console.log(nextProps.record);
     this.setState({
       currentShoppingRecord: Object.assign({
         fid: '',
@@ -47,7 +45,6 @@ class ShoppingRecordInfoModal extends Component {
         this.setState({
           okLoading: true
         }, async() => {
-          try {
             // 表单验证通过
             let result;
             Object.assign(values, {
@@ -71,9 +68,6 @@ class ShoppingRecordInfoModal extends Component {
             } else {
               message.error('新增消费记录失败');
             }
-          } catch (err) {
-            message.error(res_result.globalServerError);
-          }
         });
       }
     });

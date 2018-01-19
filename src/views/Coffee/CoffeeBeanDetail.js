@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './CoffeeBeanDetail.less';
 
 import coffeeAPI from '../../api/coffee';
-import { res_result } from '../../api/network';
 
 import ShoppingRecord from '../../components/ShoppingRecord';
 
@@ -30,7 +29,6 @@ class CoffeeBeanDetail extends Component {
   }
 
   componentDidMount() {
-    try {
       this.setState({
         isLoadingMain: true
       }, async () => {
@@ -47,9 +45,6 @@ class CoffeeBeanDetail extends Component {
         }
         this.setState(updateObj);
       });
-    } catch (err) {
-      message.error(res_result.globalServerError);
-    }
   }
 
   render() {
