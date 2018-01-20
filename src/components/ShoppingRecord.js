@@ -6,7 +6,7 @@ import ShoppingRecordItem from './ShoppingRecordItem';
 import sRecordAPI from '../api/shoppingRecord';
 import storeHelpter from '../helper/storeHelper';
 
-import { Spin, Button, Icon, message, Timeline } from 'antd';
+import { Spin, Button, Icon, Timeline } from 'antd';
 
 class ShoppingRecord extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class ShoppingRecord extends Component {
   }
 
   handleShowInfo = () => {
+    this.selectRecord = null;
     this.selectRecord = {
       uid: storeHelpter.getUserInfo().id,
       fid: this.props.fid

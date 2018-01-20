@@ -10,7 +10,7 @@ export default {
       const resJson = await request(api.user.status, {
         method: "POST"
       });
-      if (resJson.result) {
+      if (resJson && resJson.result) {
         store.dispatch(aLogin(resJson.user));
         resolve(true);
       } else {

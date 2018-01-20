@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './ShoppingRecordInfo.less';
 
-import { Modal, Form, Input, message } from 'antd';
+import { Modal, Form, Input, message, DatePicker, Rate, InputNumber} from 'antd';
 import recordAPI from '../api/shoppingRecord';
 
 class ShoppingRecordInfoModal extends Component {
@@ -47,6 +47,8 @@ class ShoppingRecordInfoModal extends Component {
         }, async() => {
             // 表单验证通过
             let result;
+            // 格式化日期
+            values.buy_date = (new Date(values.buy_date)).toLocaleDateString();
             Object.assign(values, {
               uid: this.state.currentShoppingRecord.uid,
               fid: this.state.currentShoppingRecord.fid
@@ -81,6 +83,11 @@ class ShoppingRecordInfoModal extends Component {
     const { visible } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { currentShoppingRecord } = this.state;
+
+    const modalStyle = {
+      top: 20
+    }
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -92,13 +99,13 @@ class ShoppingRecordInfoModal extends Component {
       },
     };
     return(
-      <Modal title={this.info.title} visible={visible} onOk={this.handleOk} onCancel={this.handleCancel}>
+      <Modal title={this.info.title} visible={visible} onOk={this.handleOk} onCancel={this.handleCancel} style={modalStyle}>
         <Form.Item {...formItemLayout} label="日期">
           {getFieldDecorator('buy_date', {
             initialValue: currentShoppingRecord.buy_date,
             rules: [{ required: true, message: '日期不能为空!' }],
           })(
-            <Input />
+            <DatePicker />
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="标题">
@@ -122,8 +129,9 @@ class ShoppingRecordInfoModal extends Component {
             initialValue: currentShoppingRecord.price,
             rules: [{ required: true, message: '价格不能为空!' }],
           })(
-            <Input />
+            <InputNumber defaultValue={0} min={0} />
           )}
+          <span style={{ marginLeft: 8 }}>元</span>
         </Form.Item>
         <Form.Item {...formItemLayout} label="数量">
           {getFieldDecorator('quantity', {
@@ -144,9 +152,9 @@ class ShoppingRecordInfoModal extends Component {
         <Form.Item {...formItemLayout} label="评分">
           {getFieldDecorator('rate', {
             initialValue: currentShoppingRecord.rate,
-            rules: [{ required: true, message: '评分不能为空!' }],
+            rules: [{ required: false, message: '评分不能为空!' }],
           })(
-            <Input />
+            <Rate allowHalf />
           )}
         </Form.Item>
       </Modal>

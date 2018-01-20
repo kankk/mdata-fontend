@@ -12,7 +12,7 @@ class ShoppingRecordItem extends Component {
     const { record } = this.props;
     return (
       <Timeline.Item>
-        { record.buy_date }
+        { (new Date(record.buy_date)).toLocaleDateString() }
       </Timeline.Item>
     );
   }
