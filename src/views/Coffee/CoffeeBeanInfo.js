@@ -85,7 +85,7 @@ class CoffeeBeanInfoModal extends Component {
       <Modal title={this.info.title} visible={visible} onOk={this.handleOk} onCancel={this.handleCancel}>
         <Form.Item {...formItemLayout} label="名称(CN)">
           {getFieldDecorator('name_cn', {
-            initialValue: this.state.currentCoffeeBean.name_cn,
+            initialValue: currentCoffeeBean.name_cn,
             rules: [{ required: true, message: '名称(CN)不能为空!' }],
           })(
             <Input />
@@ -93,7 +93,7 @@ class CoffeeBeanInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="名称(EN)">
           {getFieldDecorator('name_en', {
-            initialValue: this.state.currentCoffeeBean.name_en,
+            initialValue: currentCoffeeBean.name_en,
             rules: [{ required: false, message: '名称(EN)不能为空!' }],
           })(
             <Input />
@@ -101,7 +101,7 @@ class CoffeeBeanInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="产地">
           {getFieldDecorator('origin', {
-            initialValue: this.state.currentCoffeeBean.origin,
+            initialValue: currentCoffeeBean.origin,
             rules: [{ required: false, message: '产地不能为空!' }],
           })(
             <Input />
@@ -109,7 +109,7 @@ class CoffeeBeanInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="口感">
           {getFieldDecorator('mouthfeel', {
-            initialValue: this.state.currentCoffeeBean.mouthfeel,
+            initialValue: currentCoffeeBean.mouthfeel,
             rules: [{ required: false, message: '口感不能为空!' }],
           })(
             <Input />

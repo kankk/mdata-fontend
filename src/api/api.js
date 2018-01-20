@@ -8,7 +8,8 @@ export default {
     login: '/api/user/login',
     logout: '/api/user/logout',
     register: '/api/user/register',
-    list: '/api/user/list'
+    list: '/api/user/list',
+    password: '/api/user/password'
   },
   coffee: {
     coffeeBeans: '/api/coffee/beans',

@@ -57,6 +57,28 @@ export default {
       resolve(resJson);
     });
   },
+  changePassword(user) {
+    return new Promise(async (resolve, reject) => {
+      const id = user.id;
+      const username = user.username;
+      const password = user.password;
+      const enPassword = md5(username + password);
+      const changeUser = {
+        id,
+        password,
+        enPassword
+      };
+      const resJson = await request(api.user.password, {
+        method: 'PUT',
+        body: changeUser
+      });
+      if (resJson && resJson.result) {
+        resolve(resJson);
+      } else {
+        resolve();
+      }
+    });
+  },
   logout() {
     return new Promise(async (resolve, reject) => {
       const resJson = await request(api.user.logout, {
