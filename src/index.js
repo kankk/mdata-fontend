@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import App from './views/App/App';
 import reducer from './reducers';
+import 'moment/locale/zh-cn';
 
 import './assets/styles/common.less';
 import './assets/styles/global.less';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ShoppingRecordInfo.less';
 
+import moment from 'moment';
 import {Timeline } from 'antd';
 
 class ShoppingRecordItem extends Component {
@@ -12,7 +13,7 @@ class ShoppingRecordItem extends Component {
     const { record } = this.props;
     return (
       <Timeline.Item>
-        { (new Date(record.buy_date)).toLocaleDateString() }
+        { moment(record.buy_date).format('ll') }
       </Timeline.Item>
     );
   }

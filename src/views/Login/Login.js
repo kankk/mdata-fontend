@@ -99,7 +99,6 @@ class Login extends Component {
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/home'}};
     
-    console.log(storeHelper.getLoginStatus());
     if(storeHelper.getLoginStatus()) {
       return (
         <Redirect to={from} />

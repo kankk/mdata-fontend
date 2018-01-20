@@ -126,10 +126,10 @@ class ShoppingRecordInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="价格">
           {getFieldDecorator('price', {
-            initialValue: currentShoppingRecord.price,
+            initialValue: currentShoppingRecord.price || 0,
             rules: [{ required: true, message: '价格不能为空!' }],
           })(
-            <InputNumber defaultValue={0} min={0} />
+            <InputNumber min={0} />
           )}
           <span style={{ marginLeft: 8 }}>元</span>
         </Form.Item>
