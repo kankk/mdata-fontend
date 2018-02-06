@@ -42,7 +42,6 @@ class CoffeeBeverage extends Component {
   }
 
   handleListItemEdit = (item) => {
-    this.selectCoffeeBeverage = null;
     this.selectCoffeeBeverage = item;
     this.setState({
       visibleInfo: true

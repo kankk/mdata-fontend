@@ -6,7 +6,8 @@ import ShoppingRecordItem from './ShoppingRecordItem';
 import sRecordAPI from '../api/shoppingRecord';
 import storeHelpter from '../helper/storeHelper';
 
-import { Spin, Button, Icon, Timeline } from 'antd';
+import shoppingRecordAPI from '../api/shoppingRecord';
+import { Spin, Button, Icon, Timeline, message } from 'antd';
 
 class ShoppingRecord extends Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class ShoppingRecord extends Component {
   }
 
   handleShowInfo = () => {
-    this.selectRecord = null;
     this.selectRecord = {
       uid: storeHelpter.getUserInfo().id,
       fid: this.props.fid
@@ -35,6 +35,35 @@ class ShoppingRecord extends Component {
     this.setState({
       visibleInfo: true
     });
+  }
+
+  handleListItemDelete = (record) => {
+    try {
+      this.setState({
+        isLoading: true
+      }, async () => {
+        const result = await shoppingRecordAPI.deleteShoppingRecord(record.id);
+        this.setState({
+          isLoading: false
+        }, () => {
+          if (result) {
+            const _records = this.state.records;
+            const _index = _records.findIndex(function(_record, index, arr) {
+              return _record.id === record.id;
+            });
+            _records.splice(_index, 1);
+            this.setState({
+              records: _records
+            });
+            message.success('删除成功');
+          } else {
+            message.warn('删除失败');
+          }
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   closeInfo = (record) => {
@@ -81,7 +110,7 @@ class ShoppingRecord extends Component {
     const { isLoading, visibleInfo, records } = this.state;
 
     const shoppingRecordList = records.map((record) => 
-      <ShoppingRecordItem key ={record.id} record={record}></ShoppingRecordItem>
+      <ShoppingRecordItem key ={record.id} record={record} onEditClick={() => this.handleListItemEdit(record)} onDeleteClick={() => this.handleListItemDelete(record)}></ShoppingRecordItem>
     );
 
     return (

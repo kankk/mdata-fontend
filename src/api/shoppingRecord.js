@@ -30,10 +30,10 @@ export default {
   },
   deleteShoppingRecord(id) {
     return new Promise(async (resolve, reject) => {
-      const resJson = await request(`${api.shoopingRecord.record}/${id}`, {
+      await request(`${api.shoopingRecord.record}/${id}`, {
         method: 'DELETE'
       });
-      resolve(resJson);
+      resolve(true);
     });
   }
 }

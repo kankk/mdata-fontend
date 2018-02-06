@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ShoppingRecordInfo.less';
 
+import moment from 'moment';
 import { Modal, Form, Input, message, DatePicker, Rate, InputNumber} from 'antd';
 import recordAPI from '../api/shoppingRecord';
 
@@ -28,11 +29,11 @@ class ShoppingRecordInfoModal extends Component {
         price: '',
         quantity: '',
         remark: '',
-        rate: '',
-        buy_date: ''
+        rate: 0,
+        buy_date: moment()
       }, nextProps.record)
     });
-    if(!nextProps.record) {
+    if(!nextProps.record || !nextProps.record.id) {
       this.info.title = '新增消费记录'
     } else {
       this.info.title = '修改消费记录'
@@ -102,7 +103,7 @@ class ShoppingRecordInfoModal extends Component {
       <Modal title={this.info.title} visible={visible} onOk={this.handleOk} onCancel={this.handleCancel} style={modalStyle}>
         <Form.Item {...formItemLayout} label="日期">
           {getFieldDecorator('buy_date', {
-            initialValue: currentShoppingRecord.buy_date,
+            initialValue: moment(currentShoppingRecord.buy_date) || currentShoppingRecord.buy_date,
             rules: [{ required: true, message: '日期不能为空!' }],
           })(
             <DatePicker />
@@ -143,18 +144,16 @@ class ShoppingRecordInfoModal extends Component {
         </Form.Item>
         <Form.Item {...formItemLayout} label="备注">
           {getFieldDecorator('remark', {
-            initialValue: currentShoppingRecord.remark,
-            rules: [{ required: true, message: '备注不能为空!' }],
+            initialValue: currentShoppingRecord.remark
           })(
             <Input />
           )}
         </Form.Item>
         <Form.Item {...formItemLayout} label="评分">
           {getFieldDecorator('rate', {
-            initialValue: currentShoppingRecord.rate,
-            rules: [{ required: false, message: '评分不能为空!' }],
+            initialValue: currentShoppingRecord.rate
           })(
-            <Rate allowHalf />
+            <Rate count={10} />
           )}
         </Form.Item>
       </Modal>

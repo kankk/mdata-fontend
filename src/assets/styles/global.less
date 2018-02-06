@@ -1,13 +1,5 @@
 @import './common.less';
 
-.icon-clickable {
-  color: #fff;
-  &:hover {
-    color: #a3a3a3;
-    cursor: pointer;
-  }
-}
-
 .module-sider {
   overflow: auto;
   height: 100vh;
@@ -39,6 +31,32 @@
   margin-left: 200px + @module-content-margin;
 }
 
+.icon-clickable {
+  color: #fff;
+  &:hover {
+    color: #a3a3a3;
+    cursor: pointer;
+  }
+}
+
+.icon-delete {
+  margin-left: 10px;
+  color: @sub-icon-color;
+  &:hover {
+    cursor: pointer;
+    color: #f5222d;
+  }
+}
+
+.icon-edit {
+  margin-left: 10px;
+  color: @sub-icon-color;
+  &:hover {
+    cursor: pointer;
+    color: #40a9ff;
+  }
+}
+
 .list-item {
   border: @listitem-border;
   border-radius: 2px;
@@ -48,22 +66,12 @@
 
   &-delete {
     float: right;
-    margin-left: 10px;
-    color: @sub-icon-color;
-    &:hover {
-      cursor: pointer;
-      color: #f5222d;
-    }
+    .icon-delete;
   }
 
   &-edit {
     float: right;
-    margin-left: 10px;
-    color: @sub-icon-color;
-    &:hover {
-      cursor: pointer;
-      color: #40a9ff;
-    }
+    .icon-edit;
   }
 }
 
