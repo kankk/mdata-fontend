@@ -25,6 +25,7 @@ export default {
   },
   trace: {
     count: '/api/trace/count',
-    dates: '/api/trace/dates'
+    dates: '/api/trace/dates',
+    websites: '/api/trace/websites'
   }
 }

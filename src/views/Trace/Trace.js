@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Trace.less';
 
-import TraceInterface from './TraceInterface';
-
 import { Route, Link, Redirect } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
+import TraceWebsite from './TraceWebsite';
+import TraceInterface from './TraceInterface';
 const { Content, Sider } = Layout;
 
 const traceSidebarList = [
@@ -13,6 +13,11 @@ const traceSidebarList = [
     path: '/interface',
     component: TraceInterface,
     navName: '接口统计'
+  },
+  {
+    path: '/website',
+    component: TraceWebsite,
+    navName: '导航统计'
   }
 ];
 

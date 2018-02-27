@@ -9,5 +9,13 @@ export default {
       });
       resolve(resJson.rows);
     });
+  },
+  countWebsitesByLink() {
+    return new Promise(async(resolve, reject) => {
+      const resJson = await request(api.trace.websites, {
+        method: 'GET'
+      });
+      resolve(resJson.rows);
+    });
   }
 }

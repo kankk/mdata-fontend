@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './TraceInterface.less';
 
 import traceAPI from '../../api/trace';
-import { Chart, Geom, Axis, Tooltip, Legend, Coord } from 'bizcharts';
+// import { Chart, Geom, Axis, Tooltip, Legend, Coord } from 'bizcharts';
 
 class TraceInterface extends Component {
   constructor(props) {
