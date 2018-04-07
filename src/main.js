@@ -3,8 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Http from './server/$http.service'
+import Moment from './server/$moment.service'
 
 Vue.config.productionTip = false
+
+Vue.use(Http)
+Vue.use(Moment)
 
 /* eslint-disable no-new */
 new Vue({
