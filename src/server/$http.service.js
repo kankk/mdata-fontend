@@ -57,5 +57,5 @@ export const $http = function (url = '', data = {}, type = 'GET', _config = {}) 
 }
 
 export default function plugin (Vue, options) {
-  Vue.prototype.$moment = axios
+  Vue.prototype.$http = axios
 }
