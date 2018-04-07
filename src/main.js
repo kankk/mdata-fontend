@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Http from './server/$http.service'
-import Moment from './server/$moment.service'
-import ElementUI from './server/$element.service'
+import Http from './services/$http.service'
+import Moment from './services/$moment.service'
+import ElementUI from './services/$element.service'
 
 Vue.config.productionTip = false
 
