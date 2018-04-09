@@ -20,6 +20,7 @@ const codeMessage = {
 }
 
 axios.defaults.baseURL = config.API_HOST
+axios.defaults.withCredentials = true
 axios.interceptors.request.use(config => {
   return config
 }, error => {
