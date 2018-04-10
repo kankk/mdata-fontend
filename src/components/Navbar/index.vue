@@ -6,7 +6,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title">总览</span>
       </el-menu-item>
-      <el-menu-item index="pictures">
+      <el-menu-item index="picture">
         <i class="el-icon-picture"></i>
         <span slot="title">图片</span>
       </el-menu-item>

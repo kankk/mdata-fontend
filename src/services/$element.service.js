@@ -10,6 +10,7 @@ import {
   FormItem,
   Button,
   Input,
+  Upload,
   Message
 } from 'element-ui'
 
@@ -28,6 +29,7 @@ export default function plugin (Vue, options) {
   Vue.use(Input)
   Vue.use(Button)
   Vue.use(Input)
+  Vue.use(Upload)
 
   Vue.prototype.$message = Message
 }
