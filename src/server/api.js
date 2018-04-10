@@ -11,18 +11,6 @@ export default {
     list: '/api/user/list',
     password: '/api/user/password'
   },
-  coffee: {
-    coffeeBeans: '/api/coffee/beans',
-    coffeeBean: '/api/coffee/bean',
-    coffeeBeverages: '/api/coffee/beverages',
-    coffeeBeverage: '/api/coffee/beverage',
-    coffeeInfos: '/api/coffee/infos',
-    coffeeInfo: '/api/coffee/info'
-  },
-  shoopingRecord: {
-    records: '/api/shoppingrecord/records',
-    record: '/api/shoppingrecord/record'
-  },
   trace: {
     count: '/api/trace/count',
     dates: '/api/trace/dates',
