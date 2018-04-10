@@ -14,7 +14,24 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true
-      }
+      },
+      children: [{
+        path: '',
+        name: 'overall',
+        component: resolve => require(['@/views/overall'], resolve)
+      }, {
+        path: 'pictures',
+        name: 'pictures',
+        component: resolve => require(['@/views/pictures'], resolve)
+      }, {
+        path: 'blog',
+        name: 'blog',
+        component: resolve => require(['@/views/blog'], resolve)
+      }, {
+        path: 'setting',
+        name: 'setting',
+        component: resolve => require(['@/views/setting'], resolve)
+      }]
     },
     {
       path: '/login',

@@ -1,4 +1,10 @@
 import {
+  Container,
+  Aside,
+  Main,
+  Menu,
+  MenuItem,
+  Submenu,
   Dialog,
   Form,
   FormItem,
@@ -10,6 +16,12 @@ import {
 export default function plugin (Vue, options) {
   Vue.prototype.$ELEMENT = { size: 'small' }
 
+  Vue.use(Container)
+  Vue.use(Aside)
+  Vue.use(Main)
+  Vue.use(Menu)
+  Vue.use(MenuItem)
+  Vue.use(Submenu)
   Vue.use(Dialog)
   Vue.use(Form)
   Vue.use(FormItem)
