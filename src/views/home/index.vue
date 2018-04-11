@@ -3,7 +3,9 @@
     <el-container>
       <navbar></navbar>
       <el-main>
-        <router-view/>
+        <transition name="fade" mode="out-in">
+          <router-view/>
+        </transition>
       </el-main>
     </el-container>
   </div>
@@ -12,7 +14,7 @@
 <script>
 import Navbar from '../../components/Navbar'
 export default {
-  name: 'home',
+  name: 'Home',
   data () {
     return {
 

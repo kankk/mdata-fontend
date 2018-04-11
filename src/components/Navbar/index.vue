@@ -6,8 +6,8 @@
         <i class="el-icon-menu"></i>
         <span slot="title">总览</span>
       </el-menu-item>
-      <el-menu-item index="picture">
-        <i class="el-icon-picture"></i>
+      <el-menu-item index="pictures">
+        <i class="el-icon-pictures"></i>
         <span slot="title">图片</span>
       </el-menu-item>
       <el-menu-item index="blog">
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'navbar',
+  name: 'Navbar',
   data () {
     return {
       isCollapse: false,

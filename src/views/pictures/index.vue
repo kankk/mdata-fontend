@@ -1,12 +1,12 @@
 <template>
-  <div class="picture">
-    <div class="picture-upload">
-      <el-upload action="/api/picture/upload"
-        list-type="picture-card">
+  <div class="pictures">
+    <div class="pictures-upload">
+      <el-upload action="/api/pictures/upload" name="pictures"
+        list-type="pictures-card">
         <i class="el-icon-plus"></i>
       </el-upload>
     </div>
-    <div class="picture-list">
+    <div class="pictures-list">
 
     </div>
   </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'picture',
+  name: 'Pictures',
   data () {
     return {
 

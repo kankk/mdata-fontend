@@ -17,4 +17,5 @@ export default {
   @import './styles/layout.less';
   @import './styles/colors.less';
   @import './styles/font.less';
+  @import './styles/transition.less';
 </style>

@@ -20,9 +20,9 @@ const router = new Router({
         name: 'overall',
         component: resolve => require(['@/views/overall'], resolve)
       }, {
-        path: 'picture',
-        name: 'picture',
-        component: resolve => require(['@/views/picture'], resolve)
+        path: 'pictures',
+        name: 'pictures',
+        component: resolve => require(['@/views/pictures'], resolve)
       }, {
         path: 'blog',
         name: 'blog',

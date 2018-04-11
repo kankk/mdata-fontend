@@ -19,7 +19,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'login',
+  name: 'Login',
   data () {
     const validateUsername = (rule, value, cb) => {
       if (value === '') {
