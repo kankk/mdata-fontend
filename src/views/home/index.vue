@@ -2,7 +2,7 @@
   <div class="home">
     <el-container>
       <navbar></navbar>
-      <el-main>
+      <el-main class="home-main">
         <transition name="fade" mode="out-in">
           <router-view/>
         </transition>
@@ -27,5 +27,9 @@ export default {
 </script>
 
 <style lang="less">
-
+.home {
+  &-main {
+    margin-left: 200px;
+  }
+}
 </style>

@@ -11,6 +11,7 @@ import {
   Button,
   Input,
   Upload,
+  MessageBox,
   Message
 } from 'element-ui'
 
@@ -31,5 +32,8 @@ export default function plugin (Vue, options) {
   Vue.use(Input)
   Vue.use(Upload)
 
+  Vue.prototype.$msgbox = MessageBox
+  Vue.prototype.$alert = MessageBox.alert
+  Vue.prototype.$confirm = MessageBox.confirm
   Vue.prototype.$message = Message
 }

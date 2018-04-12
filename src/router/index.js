@@ -4,6 +4,10 @@ import Login from '../views/login'
 import Home from '../views/home'
 import userApi from '../server/user'
 
+import {
+  USER_LOGIN
+} from '../store/mutation-types'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -48,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth) && !isLogin) {
     const res = await userApi.checkUserStatus()
     if (res.result) {
-      store.commit('login', res.user)
+      store.commit(USER_LOGIN, res.user)
       next()
     } else {
       next({

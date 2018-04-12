@@ -7,7 +7,7 @@
         <span slot="title">总览</span>
       </el-menu-item>
       <el-menu-item index="pictures">
-        <i class="el-icon-pictures"></i>
+        <i class="el-icon-picture"></i>
         <span slot="title">图片</span>
       </el-menu-item>
       <el-menu-item index="blog">
@@ -51,6 +51,10 @@ export default {
 
 <style lang="less">
 .navbar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
   height: 100vh;
 
   ul {

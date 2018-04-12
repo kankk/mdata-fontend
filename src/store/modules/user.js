@@ -1,4 +1,9 @@
 import userApi from '../../server/user'
+import {
+  USER_LOGIN,
+  USER_LOGOUT
+} from '../mutation-types'
+
 const state = {
   id: '',
   username: '',
@@ -16,7 +21,7 @@ const actions = {
       try {
         const res = await userApi.login(user)
         if (res.result) {
-          commit('login', res.user)
+          commit(USER_LOGIN, res.user)
         }
         resolve(res.result)
       } catch (err) {
@@ -26,19 +31,19 @@ const actions = {
   },
 
   logout ({ commit }) {
-    commit('logout')
+    commit(USER_LOGOUT)
   }
 }
 
 const mutations = {
-  login (state, user) {
+  [USER_LOGIN] (state, user) {
     state.id = user.id
     state.username = user.username
     state.role = user.role
     state.isLogin = true
   },
 
-  logout (state) {
+  [USER_LOGOUT] (state) {
     state.isLogin = false
   }
 }

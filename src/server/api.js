@@ -11,6 +11,10 @@ export default {
     list: '/api/user/list',
     password: '/api/user/password'
   },
+  pictures: {
+    root: '/api/pictures/',
+    all: '/api/pictures/all'
+  },
   trace: {
     count: '/api/trace/count',
     dates: '/api/trace/dates',
