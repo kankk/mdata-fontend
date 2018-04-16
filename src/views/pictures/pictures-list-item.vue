@@ -10,10 +10,11 @@
       {{ fileSize }}  [{{ picture.time }}]
     </p>
     <div class="pictures-list-item-hover" v-show="hovering">
-      <i class="el-icon-share"></i>
+      <i class="el-icon-share" @click="handleShareClick"></i>
       <i class="el-icon-search" @click="handleSearchClick"></i>
       <i class="el-icon-delete" @click="handleDeleteClick"></i>
     </div>
+    <input class="hiden-copy-input" type="text" :id="picture.filename">
   </div>
 </template>
 
@@ -45,6 +46,13 @@ export default {
     },
     handleMouseleave () {
       this.hovering = false
+    },
+    handleShareClick () {
+      // 点击复制剪切功能
+      var input = document.getElementById(this.picture.filename)
+      input.value = this.picture.filename
+      input.select()
+      document.execCommand('copy')
     },
     handleSearchClick () {
       if (!this.toLoadImg) this.toLoadImg = true
@@ -126,7 +134,7 @@ export default {
     top: 0; bottom: 0;
     left: 0; right: 0;
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -139,6 +147,14 @@ export default {
   }
   &:hover {
     cursor: pointer;
+  }
+  // 隐藏的输入框,实现点击复制功能
+  .hiden-copy-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -10;
   }
 }
 </style>
