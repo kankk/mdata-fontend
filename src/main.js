@@ -7,12 +7,14 @@ import router from './router'
 import Http from './services/$http.service'
 import Moment from './services/$moment.service'
 import ElementUI from './services/$element.service'
+import Components from './components'
 
 Vue.config.productionTip = false
 
 Vue.use(Http)
 Vue.use(Moment)
 Vue.use(ElementUI)
+Vue.use(Components)
 
 /* eslint-disable no-new */
 new Vue({
