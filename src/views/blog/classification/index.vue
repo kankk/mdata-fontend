@@ -78,7 +78,6 @@ export default {
     async handleDeleteClassification (classification) {
       try {
         await this.deleteClassification(classification.id)
-        console.log('success')
         this.$message.success('删除分类成功')
       } catch (err) {
         this.$message.error('删除分类失败')

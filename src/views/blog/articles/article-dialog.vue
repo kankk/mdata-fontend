@@ -2,7 +2,7 @@
   <div>
     <el-dialog :title="title" :visible="isVisible" width="500px" :before-close="handleClose">
       <el-form ref="article-form" :model="ariclesObj" :rules="rules" label-width="60px">
-        <el-form-item label="标题" prop="title">
+        <el-form-item v-if="ariclesObj.id" label="标题" prop="title">
           <el-input v-model="ariclesObj.title" size="mini"></el-input>
         </el-form-item>
         <el-form-item label="分类" prop="classification">
@@ -94,14 +94,18 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (!valid) {
           return false
-        } else if (!this.uploadFile) {
+        } else if (!this.uploadFile && !this.ariclesObj.id) {
           this.$message.warning('请上传md文件')
           return false
         } else {
           if (this.ariclesObj.id) {
-            this.$emit('update', Object.assign({}, this.ariclesObj, {
-              path: this.uploadFile.name
-            }))
+            const updateObject = Object.assign({}, this.ariclesObj)
+            if (this.uploadFile && this.uploadFile.name) {
+              Object.assign(updateObject, {
+                path: this.uploadFile.name
+              })
+            }
+            this.$emit('update', updateObject)
           } else {
             this.$emit('add', Object.assign({}, this.ariclesObj, {
               path: this.uploadFile.name
