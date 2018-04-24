@@ -28,8 +28,8 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         if (!state.isArticlesInit) {
-          const tempArr = await blogApi.getAllArticles()
-          commit(BLOG_ARTICLES_INIT, tempArr)
+          const result = await blogApi.getAllArticles()
+          commit(BLOG_ARTICLES_INIT, result.rows)
         }
         resolve()
       } catch (err) {
@@ -54,6 +54,25 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await blogApi.editArticle(article)
+        resolve()
+        commit(BLOG_ARTICLES_EDIT, result)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  },
+  // 修改Classification的display
+  editClassificationDisplayById ({ commit }, article) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        commit(BLOG_ARTICLES_EDIT, {
+          id: article.id,
+          display: article.display
+        })
+        const result = await blogApi.editArticle({
+          id: article.id,
+          display: article.display ? 1 : 0
+        })
         resolve()
         commit(BLOG_ARTICLES_EDIT, result)
       } catch (err) {

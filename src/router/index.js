@@ -29,8 +29,17 @@ const router = new Router({
         component: resolve => require(['@/views/pictures'], resolve)
       }, {
         path: 'blog',
-        name: 'blog',
-        component: resolve => require(['@/views/blog'], resolve)
+        name: 'blog-wrap',
+        component: resolve => require(['@/views/blog'], resolve),
+        children: [{
+          path: 'articles',
+          name: 'articles',
+          component: resolve => require(['@/views/blog/articles'], resolve)
+        }, {
+          path: 'classification',
+          name: 'classification',
+          component: resolve => require(['@/views/blog/classification'], resolve)
+        }]
       }, {
         path: 'setting',
         name: 'setting',

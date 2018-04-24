@@ -50,9 +50,10 @@ export default {
     handleShareClick () {
       // 点击复制剪切功能
       var input = document.getElementById(this.picture.filename)
-      input.value = this.picture.filename
+      input.value = `/pictures/${this.picture.filename}`
       input.select()
       document.execCommand('copy')
+      this.$message.success('复制成功')
     },
     handleSearchClick () {
       if (!this.toLoadImg) this.toLoadImg = true

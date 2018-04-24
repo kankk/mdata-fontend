@@ -15,6 +15,13 @@ export default {
     root: '/api/pictures/',
     all: '/api/pictures/all'
   },
+  blog: {
+    article: '/api/blog/article',
+    articleAll: '/api/blog/article/all',
+    articleDisplay: '/api/blog/article/display',
+    classification: '/api/blog/classification',
+    classificationAll: '/api/blog/classification/all'
+  },
   trace: {
     count: '/api/trace/count',
     dates: '/api/trace/dates',

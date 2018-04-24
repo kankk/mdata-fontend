@@ -10,10 +10,18 @@
         <i class="el-icon-picture"></i>
         <span slot="title">图片</span>
       </el-menu-item>
-      <el-menu-item index="blog">
-        <i class="el-icon-document"></i>
-        <span slot="title">博客</span>
-      </el-menu-item>
+      <el-submenu index="blog">
+        <template slot="title">
+          <i class="el-icon-document"></i>
+          <span slot="title">博客</span>
+        </template>
+        <el-menu-item index="blog/articles">
+          <span slot="title">文章</span>
+        </el-menu-item>
+        <el-menu-item index="blog/classification">
+          <span slot="title">分类</span>
+        </el-menu-item>
+      </el-submenu>
       <el-menu-item index="setting">
         <i class="el-icon-setting"></i>
         <span slot="title">设置</span>

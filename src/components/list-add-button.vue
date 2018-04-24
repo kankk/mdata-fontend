@@ -13,9 +13,6 @@ export default {
     size: {
       type: String,
       default: 'medium'
-    },
-    click: {
-      type: Function
     }
   },
   methods: {

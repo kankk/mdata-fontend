@@ -6,10 +6,15 @@ import {
   MenuItem,
   Submenu,
   Dialog,
+  Table,
+  TableColumn,
   Form,
   FormItem,
   Button,
   Input,
+  Select,
+  Option,
+  Switch,
   Upload,
   MessageBox,
   Message
@@ -25,9 +30,14 @@ export default function plugin (Vue, options) {
   Vue.use(MenuItem)
   Vue.use(Submenu)
   Vue.use(Dialog)
+  Vue.use(Table)
+  Vue.use(TableColumn)
   Vue.use(Form)
   Vue.use(FormItem)
   Vue.use(Input)
+  Vue.use(Select)
+  Vue.use(Option)
+  Vue.use(Switch)
   Vue.use(Button)
   Vue.use(Input)
   Vue.use(Upload)
