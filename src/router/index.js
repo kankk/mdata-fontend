@@ -36,6 +36,10 @@ const router = new Router({
           name: 'articles',
           component: resolve => require(['@/views/blog/articles'], resolve)
         }, {
+          path: 'article/:id',
+          name: 'article-detail',
+          component: resolve => require(['@/views/blog/articles/article-detail.vue'], resolve)
+        }, {
           path: 'classification',
           name: 'classification',
           component: resolve => require(['@/views/blog/classification'], resolve)

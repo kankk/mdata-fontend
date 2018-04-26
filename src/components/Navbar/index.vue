@@ -1,5 +1,5 @@
 <template>
-  <el-aside class="navbar" width="200px">
+  <el-aside class="navbar" width="201px">
     <el-menu :default-active="defaultActive" :collapse="isCollapse" background-color="#545c64" text-color="#fff" active-text-color="#409EFF"
     @select="handleMenuSelect">
       <el-menu-item index="overall">

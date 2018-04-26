@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'AddAricleDialog',
+  name: 'ClassificationDialog',
   props: {
     visible: {
       type: Boolean,

@@ -10,6 +10,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="title" label="标题">
+        <template slot-scope="scope">
+          <el-button @click="handleTitleClick(scope.row)" type="text" size="small">{{ scope.row.title }}</el-button>
+        </template>
       </el-table-column>
       <el-table-column prop="classificationName" label="分类">
       </el-table-column>
@@ -103,6 +106,12 @@ export default {
       const article = Object.assign({}, obj)
       article.display = !article.display
       this.editClassificationDisplayById(article)
+    },
+    handleTitleClick (article) {
+      this.$router.push({
+        name: 'article-detail',
+        params: { id: article.id }
+      })
     },
     formatTime (str) {
       return this.$moment(str).format('lll')
