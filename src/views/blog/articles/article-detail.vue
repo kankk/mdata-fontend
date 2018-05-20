@@ -10,7 +10,7 @@
         </span>
         <span>{{ formatDisplayStamp }}</span>
       </div>
-      <div v-html="article.content"></div>
+      <div id="display_article" v-html="article.content"></div>
     </div>
     <div class="article-detail-wrap2">
       <span>{{ article.classificationName }}</span>
@@ -68,20 +68,5 @@ export default {
 </script>
 
 <style lang="less">
-.article-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  &-wrap, &-wrap2 {
-    width: 960px;
-    background-color: rgba(255, 255 ,255, 0.6);
-    margin-bottom: 16px;
-  }
-  &-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
+@import './display_article.less';
 </style>

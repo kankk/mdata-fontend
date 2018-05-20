@@ -18,6 +18,9 @@
 
 <script>
 import { mapActions } from 'vuex'
+import {
+  getLocalUsername
+} from '../../helpers/userHelper'
 export default {
   name: 'Login',
   data () {
@@ -60,10 +63,10 @@ export default {
           try {
             const res = await this.login(this.loginForm)
             if (res) {
-              this.$message.success('登录成功')
+              this.$message.success(res.message)
               this.$router.push('/')
             } else {
-              this.$message.error('登录失败')
+              this.$message.error(res.message)
             }
           } catch (err) {
             this.$message.error(err.message)
@@ -73,6 +76,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    this.loginForm.username = getLocalUsername() || ''
   }
 }
 </script>

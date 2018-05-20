@@ -4,10 +4,15 @@ import {
   USER_LOGOUT
 } from '../mutation-types'
 
+import {
+  setLocalUsername
+} from '../../helpers/userHelper'
+
 const state = {
   id: '',
   username: '',
   role: -1,
+  token: '',
   isLogin: false
 }
 
@@ -21,9 +26,10 @@ const actions = {
       try {
         const res = await userApi.login(user)
         if (res.result) {
-          commit(USER_LOGIN, res.user)
+          commit(USER_LOGIN, res.data)
+          res.data.username && setLocalUsername(res.data.username)
         }
-        resolve(res.result)
+        resolve(res)
       } catch (err) {
         reject(err)
       }
@@ -40,6 +46,7 @@ const mutations = {
     state.id = user.id
     state.username = user.username
     state.role = user.role
+    state.token = user.token
     state.isLogin = true
   },
 

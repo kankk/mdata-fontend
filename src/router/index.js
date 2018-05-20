@@ -63,16 +63,19 @@ router.beforeEach(async (to, from, next) => {
   const store = this.a.app.$options.store
   const isLogin = store.getters.loginStatus
   if (to.matched.some(record => record.meta.requiresAuth) && !isLogin) {
-    const res = await userApi.checkUserStatus()
-    if (res.result) {
-      store.commit(USER_LOGIN, res.user)
-      next()
-    } else {
+    try {
+      const res = await userApi.checkUserStatus()
+      if (res.result) {
+        store.commit(USER_LOGIN, res.data)
+        next()
+      } else {
+        next({
+          path: '/login'
+        })
+      }
+    } catch (err) {
       next({
         path: '/login'
-        // query: {
-        //   redirect: to.fullPath
-        // }
       })
     }
   } else if (to.name === 'Login' && isLogin) {
