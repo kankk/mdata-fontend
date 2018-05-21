@@ -20,12 +20,12 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         if (!state.isInit) {
-          const tempArr = await picturesApi.getAllPictures()
-          tempArr.map((value, index) => {
+          const result = await picturesApi.getAllPictures()
+          result.data.map((value, index) => {
             value.isLoaded = false
             value.time = moment(value.time).format('YYYY-MM-DD hh:mm:ss')
           })
-          commit(PICTURES_INIT, tempArr)
+          commit(PICTURES_INIT, result.data)
         }
         resolve()
       } catch (err) {

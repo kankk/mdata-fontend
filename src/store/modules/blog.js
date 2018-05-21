@@ -29,7 +29,7 @@ const actions = {
       try {
         if (!state.isArticlesInit) {
           const result = await blogApi.getAllArticles()
-          commit(BLOG_ARTICLES_INIT, result.rows)
+          commit(BLOG_ARTICLES_INIT, result.data)
         }
         resolve()
       } catch (err) {
@@ -98,7 +98,7 @@ const actions = {
       try {
         if (!state.isClassificationInit) {
           const result = await blogApi.getAllClassifications()
-          commit(BLOG_CLASSIFICATION_INIT, result.rows)
+          commit(BLOG_CLASSIFICATION_INIT, result.data)
         }
         resolve()
       } catch (err) {
