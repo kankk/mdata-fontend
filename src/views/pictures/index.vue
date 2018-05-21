@@ -3,7 +3,7 @@
     <div class="pictures-upload">
       <el-upload action="/api/pictures/upload" name="picture"
         list-type="picture-card" :before-upload="handleBeforeUpload" :on-success="handleUploadSuccess"
-        :on-remove="handleFileRemove">
+        :on-error="handleUploadError" :on-remove="handleFileRemove">
         <i class="el-icon-plus"></i>
       </el-upload>
     </div>
@@ -38,11 +38,15 @@ export default {
       }
     },
     handleUploadSuccess (response, file, fileList) {
+      response.message && this.$message.success(response.message)
       this.addPicture({
         filename: file.name,
         size: file.size,
         time: this.$moment().format('YYYY-MM-DD hh:mm:ss')
       })
+    },
+    handleUploadError () {
+      this.$message.error('上传图片失败')
     },
     async handleFileRemove (file, fileList) {
       try {

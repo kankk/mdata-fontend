@@ -50,7 +50,7 @@ export default {
     handleShareClick () {
       // 点击复制剪切功能
       var input = document.getElementById(this.picture.filename)
-      input.value = `/pictures/${this.picture.filename}`
+      input.value = `${window.location.origin}/public/pictures/${this.picture.filename}`
       input.select()
       document.execCommand('copy')
       this.$message.success('复制成功')
@@ -79,7 +79,7 @@ export default {
   computed: {
     fullPicturePath: function () {
       if (this.toLoadImg) {
-        return `http://localhost:4000/pictures/${this.picture.filename}`
+        return `http://localhost:7001/public/pictures/${this.picture.filename}`
       } else {
         return ''
       }
