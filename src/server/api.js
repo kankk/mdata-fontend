@@ -19,6 +19,7 @@ export default {
     article: '/api/blog/article',
     articleAll: '/api/blog/article/all',
     articleDisplay: '/api/blog/article/display',
+    articlePage: '/api/blog/article/page',
     classification: '/api/blog/classification',
     classificationAll: '/api/blog/classification/all'
   },

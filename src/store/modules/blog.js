@@ -42,8 +42,12 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await blogApi.addArticle(article)
-        resolve()
-        commit(BLOG_ARTICLES_ADD, result)
+        if (result.result) {
+          commit(BLOG_ARTICLES_ADD, result.data)
+          resolve(result)
+        } else {
+          reject(result)
+        }
       } catch (err) {
         reject(err)
       }
@@ -54,8 +58,12 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await blogApi.editArticle(article)
-        resolve()
-        commit(BLOG_ARTICLES_EDIT, result)
+        if (result.result) {
+          commit(BLOG_ARTICLES_EDIT, result.data)
+          resolve(result)
+        } else {
+          reject(result)
+        }
       } catch (err) {
         reject(err)
       }
@@ -111,8 +119,12 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await blogApi.addClassification(classification)
-        resolve()
-        commit(BLOG_CLASSIFICATION_ADD, result)
+        if (result.result) {
+          commit(BLOG_CLASSIFICATION_ADD, result.data)
+          resolve(result)
+        } else {
+          reject(result)
+        }
       } catch (err) {
         reject(err)
       }
@@ -123,8 +135,12 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await blogApi.editClassification(classification)
-        resolve()
-        commit(BLOG_CLASSIFICATION_EDIT, result)
+        if (result.result) {
+          commit(BLOG_CLASSIFICATION_EDIT, result.data)
+          resolve(result)
+        } else {
+          reject(result)
+        }
       } catch (err) {
         reject(err)
       }
@@ -135,8 +151,8 @@ const actions = {
     return new Promise(async (resolve, reject) => {
       try {
         await blogApi.deleteClassificationById(id)
-        resolve()
         commit(BLOG_CLASSIFICATION_DELETE, id)
+        resolve()
       } catch (err) {
         reject(err)
       }
