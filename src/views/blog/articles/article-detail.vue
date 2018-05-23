@@ -59,7 +59,7 @@ export default {
   async mounted () {
     const result = await blogApi.getArticleById(this.id)
     if (result.result) {
-      this.article = result.row
+      this.article = result.data
     } else {
       this.$message.error('获取文章失败')
     }

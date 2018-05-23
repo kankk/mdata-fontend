@@ -14,7 +14,7 @@
           <el-button @click="handleTitleClick(scope.row)" type="text" size="small">{{ scope.row.title }}</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="classificationName" label="分类">
+      <el-table-column prop="classificationName" label="分类" width="90">
       </el-table-column>
       <el-table-column prop="display_stamp" label="展示时间" width="180">
         <template slot-scope="scope">
