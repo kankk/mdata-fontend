@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '../views/login'
 import Home from '../views/home'
 import userApi from '../server/user'
+import store from '../store'
 
 import {
   USER_LOGIN
@@ -60,7 +61,6 @@ const router = new Router({
 
 router.beforeEach(async (to, from, next) => {
   console.log(to, from)
-  const store = this.a.app.$options.store
   const isLogin = store.getters.loginStatus
   if (to.matched.some(record => record.meta.requiresAuth) && !isLogin) {
     try {
