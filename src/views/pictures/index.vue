@@ -18,7 +18,7 @@ export default {
   name: 'Pictures',
   data () {
     return {
-
+      isRemoveFile: true
     }
   },
   methods: {
@@ -32,6 +32,7 @@ export default {
       })
       if (isExist) {
         this.$message.warning('该图片名称已经存在')
+        this.isRemoveFile = false
         return false
       } else {
         this.$message.success('开始上传图片')
@@ -49,12 +50,15 @@ export default {
       this.$message.error('上传图片失败')
     },
     async handleFileRemove (file, fileList) {
-      try {
-        await this.deletePicture(file)
-        this.$message.success('删除图片成功')
-      } catch (err) {
-        this.$message.error('删除图片失败')
+      if (this.isRemoveFile) {
+        try {
+          await this.deletePicture(file)
+          this.$message.success('删除图片成功')
+        } catch (err) {
+          this.$message.error('删除图片失败')
+        }
       }
+      this.isRemoveFile = true
     },
     ...mapActions([
       'getPictures',

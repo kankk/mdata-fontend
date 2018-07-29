@@ -62,7 +62,7 @@ export default {
         if (valid) {
           try {
             const res = await this.login(this.loginForm)
-            if (res) {
+            if (res.result) {
               this.$message.success(res.message)
               this.$router.push('/')
             } else {
