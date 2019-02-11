@@ -46,6 +46,15 @@ const router = new Router({
           component: resolve => require(['@/views/blog/classification'], resolve)
         }]
       }, {
+        path: 'autochess',
+        name: 'autochess',
+        component: resolve => require(['@/views/autochess'], resolve),
+        children: [{
+          path: 'hero',
+          name: 'autochess-hero',
+          component: resolve => require(['@/views/autochess/hero/index.vue'], resolve)
+        }]
+      }, {
         path: 'setting',
         name: 'setting',
         component: resolve => require(['@/views/setting'], resolve)

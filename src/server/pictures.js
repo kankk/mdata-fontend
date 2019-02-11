@@ -1,11 +1,11 @@
 import api from './api'
-import { $http } from '../services/$http.service'
+import { $get, $delete } from '../services/$http.service'
 
 export default {
   getAllPictures () {
-    return $http(api.pictures.all, null, 'GET')
+    return $get(api.pictures.all)
   },
   deletePictureByFilename (filename) {
-    return $http(api.pictures.root + filename, null, 'DELETE')
+    return $delete(api.pictures.root + filename)
   }
 }

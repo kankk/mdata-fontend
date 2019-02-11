@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-container>
-      <navbar></navbar>
+      <nav-bar></nav-bar>
       <el-main class="home-main">
         <transition name="fade" mode="out-in">
           <router-view/>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Navbar from '../../components/Navbar'
+import NavBar from '../../components/nav_bar'
 export default {
   name: 'Home',
   data () {
@@ -21,7 +21,7 @@ export default {
     }
   },
   components: {
-    Navbar
+    NavBar
   }
 }
 </script>

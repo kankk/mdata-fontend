@@ -1,10 +1,10 @@
 import api from './api'
 import md5 from 'md5'
-import { $http } from '../services/$http.service'
+import { $post } from '../services/$http.service'
 
 export default {
   checkUserStatus () {
-    return $http(api.user.status, null, 'POST')
+    return $post(api.user.status)
   },
   login (user) {
     const username = user.username
@@ -14,6 +14,6 @@ export default {
       username,
       password: enPassword
     }
-    return $http(api.user.login, loginUser, 'POST')
+    return $post(api.user.login, loginUser)
   }
 }

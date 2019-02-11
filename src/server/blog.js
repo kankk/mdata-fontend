@@ -1,32 +1,32 @@
 import api from './api'
-import { $http } from '../services/$http.service'
+import { $get, $post, $delete, $put } from '../services/$http.service'
 
 export default {
   getAllArticles () {
-    return $http(api.blog.articleAll, null, 'GET')
+    return $get(api.blog.articleAll)
   },
   getArticleById (id) {
-    return $http(`${api.blog.article}/${id}`, null, 'GET')
+    return $get(`${api.blog.article}/${id}`)
   },
   addArticle (article) {
-    return $http(api.blog.article, article, 'POST')
+    return $post(api.blog.article, article)
   },
   editArticle (article) {
-    return $http(api.blog.article, article, 'PUT')
+    return $put(api.blog.article, article)
   },
   deleteArticleById (id) {
-    return $http(`${api.blog.article}/${id}`, null, 'DELETE')
+    return $delete(`${api.blog.article}/${id}`)
   },
   getAllClassifications () {
-    return $http(api.blog.classificationAll, null, 'GET')
+    return $get(api.blog.classificationAll)
   },
   addClassification (classification) {
-    return $http(api.blog.classification, classification, 'POST')
+    return $post(api.blog.classification, classification)
   },
   editClassification (classification) {
-    return $http(api.blog.classification, classification, 'PUT')
+    return $put(api.blog.classification, classification)
   },
   deleteClassificationById (id) {
-    return $http(`${api.blog.classification}/${id}`, null, 'DELETE')
+    return $delete(`${api.blog.classification}/${id}`)
   }
 }

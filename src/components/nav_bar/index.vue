@@ -3,16 +3,13 @@
     <el-menu :default-active="defaultActive" :collapse="isCollapse" background-color="#545c64" text-color="#fff" active-text-color="#409EFF"
     @select="handleMenuSelect">
       <el-menu-item index="overall">
-        <i class="el-icon-menu"></i>
         <span slot="title">总览</span>
       </el-menu-item>
       <el-menu-item index="pictures">
-        <i class="el-icon-picture"></i>
         <span slot="title">图片</span>
       </el-menu-item>
       <el-submenu index="blog">
         <template slot="title">
-          <i class="el-icon-document"></i>
           <span slot="title">博客</span>
         </template>
         <el-menu-item index="blog/articles">
@@ -22,8 +19,15 @@
           <span slot="title">分类</span>
         </el-menu-item>
       </el-submenu>
+      <el-submenu index="autochess">
+        <template slot="title">
+          <span slot="title">刀塔自走棋</span>
+        </template>
+        <el-menu-item index="autochess/hero">
+          <span slot="title">英雄</span>
+        </el-menu-item>
+      </el-submenu>
       <el-menu-item index="setting">
-        <i class="el-icon-setting"></i>
         <span slot="title">设置</span>
       </el-menu-item>
     </el-menu>
@@ -32,7 +36,7 @@
 
 <script>
 export default {
-  name: 'Navbar',
+  name: 'nav-bar',
   data () {
     return {
       isCollapse: false,

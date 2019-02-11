@@ -39,7 +39,7 @@ axios.interceptors.response.use(response => {
   return Promise.reject(message)
 })
 
-export const $http = function (url = '', data = {}, type = 'GET', _config = {}) {
+const $http = function (url = '', data = {}, type = 'GET', _config = {}) {
   type = type.toUpperCase()
   const config = Object.assign(_config, {
     method: type,
@@ -57,6 +57,25 @@ export const $http = function (url = '', data = {}, type = 'GET', _config = {}) 
   })
 }
 
+export const $get = function (url = '', data = {}, _config) {
+  return $http(url, data, 'GET', _config)
+}
+
+export const $post = function (url = '', data = {}, _config) {
+  return $http(url, data, 'POST', _config)
+}
+
+export const $put = function (url = '', data = {}, _config) {
+  return $http(url, data, 'PUT', _config)
+}
+
+export const $delete = function (url = '', data = {}, _config) {
+  return $http(url, data, 'DELETE', _config)
+}
+
 export default function plugin (Vue, options) {
-  Vue.prototype.$http = axios
+  Vue.prototype.$get = $get
+  Vue.prototype.$post = $post
+  Vue.prototype.$put = $put
+  Vue.prototype.$delete = $delete
 }

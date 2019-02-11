@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import user from './modules/user'
 import pictures from './modules/pictures'
 import blog from './modules/blog'
+import autochess from './modules/autochess'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
   modules: {
     user,
     pictures,
-    blog
+    blog,
+    autochess
   },
   strict: debug
 })
