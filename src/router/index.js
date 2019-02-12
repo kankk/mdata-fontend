@@ -23,41 +23,41 @@ const router = new Router({
       children: [{
         path: '',
         name: 'overall',
-        component: resolve => require(['@/views/overall'], resolve)
+        component: () => import(/* webpackChunkName: "overall" */ '@/views/overall')
       }, {
         path: 'pictures',
         name: 'pictures',
-        component: resolve => require(['@/views/pictures'], resolve)
+        component: () => import(/* webpackChunkName: "pictures" */ '@/views/pictures')
       }, {
         path: 'blog',
         name: 'blog-wrap',
-        component: resolve => require(['@/views/blog'], resolve),
+        component: () => import(/* webpackChunkName: "blog" */ '@/views/blog'),
         children: [{
           path: 'articles',
           name: 'articles',
-          component: resolve => require(['@/views/blog/articles'], resolve)
+          component: () => import(/* webpackChunkName: "blog_articles" */ '@/views/blog/articles'),
         }, {
           path: 'article/:id',
           name: 'article-detail',
-          component: resolve => require(['@/views/blog/articles/article-detail.vue'], resolve)
+          component: () => import(/* webpackChunkName: "blog_articles_detail" */ '@/views/blog/articles/article-detail.vue'),
         }, {
           path: 'classification',
           name: 'classification',
-          component: resolve => require(['@/views/blog/classification'], resolve)
+          component: () => import(/* webpackChunkName: "blog_classification" */ '@/views/blog/classification'),
         }]
       }, {
         path: 'autochess',
         name: 'autochess',
-        component: resolve => require(['@/views/autochess'], resolve),
+        component: () => import(/* webpackChunkName: "autochess" */ '@/views/autochess'),
         children: [{
           path: 'hero',
           name: 'autochess-hero',
-          component: resolve => require(['@/views/autochess/hero/index.vue'], resolve)
+          component: () => import(/* webpackChunkName: "autochess_hero" */ '@/views/autochess/hero'),
         }]
       }, {
         path: 'setting',
         name: 'setting',
-        component: resolve => require(['@/views/setting'], resolve)
+        component: () => import(/* webpackChunkName: "setting" */ '@/views/setting'),
       }]
     },
     {
@@ -69,7 +69,6 @@ const router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
-  console.log(to, from)
   const isLogin = store.getters.loginStatus
   if (to.matched.some(record => record.meta.requiresAuth) && !isLogin) {
     try {

@@ -1,10 +1,26 @@
-# 项目介绍
-个人练手项目, 用途是管理个人数据和Vue练习
+# mdata-backend
 
-# 技术
-* Vue + vue-router + vuex
-* Element-UI
+## Project setup
+```
+npm install
+```
 
-# 库
-* axios: http请求
-* moment: 时间格式化
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
