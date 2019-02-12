@@ -20,10 +20,10 @@ const prdConfig = {
       name: false,
       cacheGroups: {
         vendors: {
-          name: 'vendors',
-        },
-        common: {
-          name: 'common'
+          name: "vendors",
+          priority: -10,
+          chunks: "initial",
+          minChunks: 1
         }
       }
     },

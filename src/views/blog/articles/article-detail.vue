@@ -47,9 +47,9 @@ export default {
     },
     formatDisplayStamp () {
       if (this.article.display_stamp) {
-        return this.$moment(this.article.display_stamp).format('lll')
+        return this.$day(this.article.display_stamp).format('YYYY-MM-DD hh:mm:ss')
       } else {
-        return this.$moment().format('ll')
+        return this.$day().format('YYYY-MM-DD hh:mm:ss')
       }
     }
   },

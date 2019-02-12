@@ -43,7 +43,7 @@ export default {
       this.addPicture({
         filename: file.name,
         size: file.size,
-        time: this.$moment().format('YYYY-MM-DD hh:mm:ss')
+        time: this.$day().format('YYYY-MM-DD hh:mm:ss')
       })
     },
     handleUploadError () {

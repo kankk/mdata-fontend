@@ -84,7 +84,7 @@ export default {
       }
     },
     formatTime (str) {
-      return this.$moment(str).format('lll')
+      return this.$day(str).format('YYYY-MM-DD hh:mm:ss')
     },
     ...mapActions([
       'getAllClassifications',

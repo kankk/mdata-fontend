@@ -1,4 +1,4 @@
-import moment from 'moment'
+import day from 'dayjs'
 import picturesApi from '../../server/pictures'
 import {
   PICTURES_INIT,
@@ -23,7 +23,7 @@ const actions = {
           const result = await picturesApi.getAllPictures()
           result.data.map((value, index) => {
             value.isLoaded = false
-            value.time = moment(value.time).format('YYYY-MM-DD hh:mm:ss')
+            value.time = day(value.time).format('YYYY-MM-DD hh:mm:ss')
           })
           commit(PICTURES_INIT, result.data)
         }
